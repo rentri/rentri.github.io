@@ -1,0 +1,35 @@
+body, html {
+    background-color: black;
+    /* color: #c4b494; */
+    color: #8baf8c ;
+    font-family: 'Roboto Mono', monospace;
+}
+
+a {
+    color: inherit;    
+}
+
+nav a:not(:last-child) {
+    margin-right: 10px; /* Add space between links */
+}
+
+
+.container {
+    display: flex;
+    width: 70%;
+}
+
+.para {
+    margin-top: 50px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.footer-img {
+    max-width: 100px; /* Adjust the size of the image */
+    margin-bottom: 10px; /* Space between the image and the text */
+}
+
