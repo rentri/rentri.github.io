@@ -50,37 +50,21 @@
     </div>
 
     <footer>
-        <a href="https://landchad.net" target="_blank">
+        <a href="https://landchad.net" class="noline" target="_blank">
             <img src="https://landchad.net/pix/landchad.gif" alt="">
         </a>
-        <a href="https://wiby.me" target="_blank">
+        <a href="https://wiby.me" class="noline" target="_blank">
             <img src="https://wiby.me/about/wiby.gif" alt="">
+        </a>
+        <a href="https://thepiratebay.org/index.html" class="noline" target="_blank">
+            <img src="/misc/piracy.gif" alt="">
         </a>
         <img src="/pic/TV_Lain.gif" alt="Footer Image" class="footer-img">
         <p>&copy; 2024 rentri. All rights reserved.</p>
     </footer>
 
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var audio = document.getElementById('background-audio');
-            // Play the audio and handle autoplay restrictions
-            audio.play().catch(function(error) {
-                console.log('Autoplay was prevented:', error);
-            });
-
-            // Adjust the audio playback to end 3 seconds earlier
-            audio.addEventListener('canplaythrough', function() {
-                // Set the end time to 3 seconds before the duration
-                var endTime = audio.duration - 3;
-                audio.addEventListener('timeupdate', function() {
-                    if (audio.currentTime >= endTime) {
-                        audio.currentTime = 0; // Reset to the start
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="/scripts/audio.js"></script>
 
 </body>
 </html>

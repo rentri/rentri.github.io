@@ -9,6 +9,10 @@ a {
     color: inherit;    
 }
 
+.noline {
+    text-decoration: none;
+}
+
 nav a:not(:last-child) {
     margin-right: 10px; /* Add space between links */
 }
