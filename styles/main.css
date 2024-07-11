@@ -25,14 +25,8 @@ nav a:not(:last-child) {
     z-index: 1000; /* Ensure the corner div is above other content */
     max-height: 100vh;
     overflow-y: auto;
+    /* align-items: center; */
 }
-
-/* .cc {
-    position: fixed;
-    top: 0;
-    right: 0;
-} */
-
 
 
 .container {

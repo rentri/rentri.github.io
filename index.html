@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-    <div class="player">
-
-    </div>
     <div class="container">
         <div class="logo">
             <img src="/pic/tumblr_stop_stealing_my_shit.gif" alt="">
         </div>
         <div class="main">
+            <div class="player">
+                <audio id="background-audio" controls loop autoplay>
+                    <source src="misc/timecop.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
             <a href="index.html">
                 <h1>rentri</h1>
             </a>
@@ -56,6 +59,28 @@
         <img src="/pic/TV_Lain.gif" alt="Footer Image" class="footer-img">
         <p>&copy; 2024 rentri. All rights reserved.</p>
     </footer>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('background-audio');
+            // Play the audio and handle autoplay restrictions
+            audio.play().catch(function(error) {
+                console.log('Autoplay was prevented:', error);
+            });
+
+            // Adjust the audio playback to end 3 seconds earlier
+            audio.addEventListener('canplaythrough', function() {
+                // Set the end time to 3 seconds before the duration
+                var endTime = audio.duration - 3;
+                audio.addEventListener('timeupdate', function() {
+                    if (audio.currentTime >= endTime) {
+                        audio.currentTime = 0; // Reset to the start
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
