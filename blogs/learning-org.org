@@ -1,0 +1,162 @@
+#+TITLE: Learning Emacs ORG Mode
+#+AUTHOR: rentri
+#+DESCRIPTION: Trying to learn emacs org mode
+#+LANGUAGE: en
+#+KEYWORDS: Emacs, Documentation
+#+HTML_LINK_HOME: /index.html
+
+* Document Metadata
+#+begin_src org
+#+TITLE: My Awesome Document
+#+AUTHOR: rentri
+#+DATE: 2024-07-16
+#+EMAIL: rentri@example.com
+#+DESCRIPTION: This document covers the basics of Org mode in Emacs.
+#+KEYWORDS: Org-mode, Emacs, Documentation
+#+LANGUAGE: en
+#+end_src
+
+* Headings
+#+begin_src org
+*{SPC}Heading 1
+**{SPC}Heading 2
+***{SPC}Heading 3
+...so on...
+#+end_src
+** Heading 2
+- **{SPC}Heading 2
+*** Heading 3
+- **{SPC}Heading 3
+
+* Lists
+#+begin_src
+- This is a unordered list
+  - This item is part of the above one!
+    + This one too!
+1. A numbered list
+   1. A numbered list inside a numbered list
+#+end_src
+
+- This is a unordered list
+  - This item is part of the above one!
+    + This one too!
+
+
+1. A ordered list
+  1. A ordered list inside a ordered list
+
+- use ~tab~ when over a list or heading(HEADING IS ALSO A LIST) in normal mode to collapse and expand list
+
+- you can use ~SHIFT-RIGHT SHIFT-LEFT~ to cycle between different list style
+
+* Text Formating
+#+begin_src org
+*bold* /italics/ _underline_ ~verbatim~ +strike-through+
+#+end_src
+- Individual words can be *bolded* with stars, /italicized/ with forward slashes, and _underlined_ with underscores. Also, there is ~verbatim~ and +strike-through+.
+
+* TODO Write this blogpost
+#+begin_src org
+- [X] Document Metadata
+- [X] Headings
+- [X] Lists
+- [X] Todo
+- [ ] Not Done
+#+end_src
+- [X] Document Metadata
+- [X] Headings
+- [X] Lists
+- [X] Todo
+- [ ] Not done
+- [X] Tables
+- You can mark a todo list item as done by going to its line and pressing enter in normal mode
+
+* Tables
+#+begin_src org
+#+ATTR_HTML: :frame border
+|-----------+-----------|
+| item 1    | item 2    |
+| item 1, 2 | itme 2, 2 |
+|-----------+-----------|
+#+end_src
+#+ATTR_HTML: :frame border
+|-----------+-----------|
+| item 1    | item 2    |
+| item 1, 2 | itme 2, 2 |
+|-----------+-----------|
+
+** Moving
+
+  - M-a (org-table-beginning-of-field) :: Move to beginning of the current table field, or on to the previous field.
+
+  - M-e (org-table-end-of-field) :: Move to end of the current table field, or on to the next field.
+
+** Column and row editing
+
+  - M-LEFT (org-table-move-column-left) :: Move the current column left.
+
+  - M-RIGHT (org-table-move-column-right) :: Move the current column right.
+
+  - M-UP (org-table-move-row-up) :: Move the current row up.
+
+  - M-DOWN (org-table-move-row-down) :: Move the current row down.
+
+  - S-UP/DOWN/RIGHT/LEFT :: Move cell by swapping with adjacent cell.
+
+  - M-S-DOWN (org-table-insert-row) :: Insert a new row above the current row. With a prefix argument, the line is created below the current one.
+
+  - C-c - (org-table-insert-hline) :: Insert a horizontal line below current row. With a prefix argument, the line is created above the current line.
+
+* Blocks
+** Code Block
+#+begin_src C :exports both
+#include <stdio.h>
+
+int main(void)
+{
+  printf("Helo Code Blocks\n");
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Helo Code Blocks
+
+- ~#+begin_src {languge} {options}... #+end_src~ is used for code blocks
+- To execute the code block and get ~#+RESULTS:~ use ~Ctrl-c Ctrl-c~
+- To include the result add option ~:exports both~
+
+** Templates
+#+begin_src org
+s    #+begin_src ... #+end_src
+e    #+begin_example ... #+end_example
+q    #+begin_quote ... #+end_quote
+v    #+begin_verse ... #+end_verse
+c    #+begin_center ... #+end_center
+l    #+begin_latex ... #+end_latex
+L    #+latex:
+h    #+begin_html ... #+end_html
+H    #+html:
+a    #+begin_ascii ... #+end_ascii
+A    #+ascii:
+i    #+index: line
+I    #+include: line
+#+end_src
+
+- just type ~<{temeplate selector}~ then ~<Tab>~
+
+* Links
+#+begin_src
+[[Links][Links]] format > "[[section title][link title]]"
+#+end_src
+- Go to [[Headings]]
+
+** Image
+#+CAPTION: lain
+[[/pic/レイン.jpg]]
+
+* Export
+** HTML
+#+begin_src org
+Ctrl-c Ctrl-e h o
+#+end_src

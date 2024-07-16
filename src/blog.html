@@ -13,8 +13,8 @@
         </div>
         <div class="main">
             <a href="/">
-                <img src="/pic/lainwin3.gif" alt="" class="cc" width="25%">
-                <img src="/pic/LainLaugh.gif"  class="cc" width="25%">
+                <img src="/pic/lainwin3.gif" width="25%">
+                <img src="/pic/LainLaugh.gif"  width="25%">
                 <h1>Blogs</h1>
             </a>
             <nav>
@@ -22,8 +22,13 @@
                 <a href="blog.html">Blog</a>
                 <a href="projects.html">Projects</a>
             </nav>
-            <div class="para">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nostrum perferendis ex, assumenda quam, tenetur laborum atque minus expedita voluptatibus nobis repellendus sapiente sequi perspiciatis amet voluptatum, accusantium reprehenderit pariatur?</p>
+            <div class="para" id="itemContainer">
+             <!-- js items here -->
+            </div>
+            <div class="pagination">
+                <a id="prevLink" href="javascript:void(0)" onclick="changePage(-1)" class="disabled">Previous</a>
+                <span id="pageInfo"></span>
+                <a id="nextLink" href="javascript:void(0)" onclick="changePage(1)">Next</a>
             </div>
         </div>
 
@@ -43,5 +48,7 @@
         <img src="/pic/TV_Lain.gif" alt="Footer Image" class="footer-img">
         <p>&copy; 2024 rentri. All rights reserved.</p>
     </footer>
+
+    <script src="/scripts/blogpaginations.js"></script>
 </body>
 </html>

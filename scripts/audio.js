@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var audio = document.getElementById('background-audio');
-    // Play the audio and handle autoplay restrictions
-    audio.play().catch(function(error) {
-        console.log('Autoplay was prevented:', error);
-    });
+
 
     // Adjust the audio playback to end 3 seconds earlier
     audio.addEventListener('canplaythrough', function() {

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-07-16 Tue 16:04 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Learning Emacs ORG Mode</title>
+<meta name="author" content="rentri" />
+<meta name="description" content="Trying to learn emacs org mode" />
+<meta name="keywords" content="Emacs, Documentation" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/styles/blogs.css">
+</head>
+<body>
+
+<div class="top">
+    <a href="/src/blog.html">Blog </a>
+    |
+    <a href="/">Home</a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Learning Emacs ORG Mode</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc715568">1. Document Metadata</a></li>
+<li><a href="#orgb21ab44">2. Headings</a>
+<ul>
+<li><a href="#org70588b2">2.1. Heading 2</a>
+<ul>
+<li><a href="#orgafa5237">2.1.1. Heading 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org9cde2f2">3. Lists</a></li>
+<li><a href="#orgb18131b">4. Text Formating</a></li>
+<li><a href="#org170175c">5. <span class="todo TODO">TODO</span> Write this blogpost</a></li>
+<li><a href="#org0b3fb5d">6. Tables</a>
+<ul>
+<li><a href="#orge54f2ea">6.1. Moving</a></li>
+<li><a href="#org063a7d2">6.2. Column and row editing</a></li>
+</ul>
+</li>
+<li><a href="#orge7c243f">7. Blocks</a>
+<ul>
+<li><a href="#orgdcc4e5e">7.1. Code Block</a></li>
+<li><a href="#org38c78da">7.2. Templates</a></li>
+</ul>
+</li>
+<li><a href="#orgc77e5e6">8. Links</a>
+<ul>
+<li><a href="#orgd3d5945">8.1. Image</a></li>
+</ul>
+</li>
+<li><a href="#org1765335">9. Export</a>
+<ul>
+<li><a href="#org9798d6b">9.1. HTML</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc715568" class="outline-2">
+<h2 id="orgc715568"><span class="section-number-2">1.</span> Document Metadata</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-org"><span style="background-color: #16161D;">#+TITLE:</span> <span style="color: #afeeee; font-weight: bold;">My Awesome Document</span>
+<span style="background-color: #16161D;">#+AUTHOR:</span> <span style="color: #afeeee;">rentri</span>
+<span style="background-color: #16161D;">#+DATE:</span> <span style="color: #afeeee;">2024-07-16</span>
+<span style="background-color: #16161D;">#+EMAIL:</span> <span style="color: #afeeee;">rentri@example.com</span>
+<span style="color: #98BB6C; background-color: #2B3328;">#+DESCRIPTION: This document covers the basics of Org mode in Emacs.</span>
+<span style="color: #98BB6C; background-color: #2B3328;">#+KEYWORDS: Org-mode, Emacs, Documentation</span>
+<span style="color: #98BB6C; background-color: #2B3328;">#+LANGUAGE: en</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb21ab44" class="outline-2">
+<h2 id="orgb21ab44"><span class="section-number-2">2.</span> Headings</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-org">*{SPC}Heading 1
+**{SPC}Heading 2
+***{SPC}Heading 3
+...so on...
+</pre>
+</div>
+</div>
+<div id="outline-container-org70588b2" class="outline-3">
+<h3 id="org70588b2"><span class="section-number-3">2.1.</span> Heading 2</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>**{SPC}Heading 2</li>
+</ul>
+</div>
+<div id="outline-container-orgafa5237" class="outline-4">
+<h4 id="orgafa5237"><span class="section-number-4">2.1.1.</span> Heading 3</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<ul class="org-ul">
+<li>**{SPC}Heading 3</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9cde2f2" class="outline-2">
+<h2 id="org9cde2f2"><span class="section-number-2">3.</span> Lists</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-nil">- This is a unordered list
+  - This item is part of the above one!
+    + This one too!
+1. A numbered list
+   1. A numbered list inside a numbered list
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>This is a unordered list
+<ul class="org-ul">
+<li>This item is part of the above one!
+<ul class="org-ul">
+<li>This one too!</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<ol class="org-ol">
+<li>A ordered list
+<ol class="org-ol">
+<li>A ordered list inside a ordered list</li>
+</ol></li>
+
+<li>use <code>tab</code> when over a list or heading(HEADING IS ALSO A LIST) in normal mode to collapse and expand list</li>
+
+<li>you can use <code>SHIFT-RIGHT SHIFT-LEFT</code> to cycle between different list style</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb18131b" class="outline-2">
+<h2 id="orgb18131b"><span class="section-number-2">4.</span> Text Formating</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-org"><span style="font-weight: bold;">*bold*</span> <span style="font-style: italic;">/italics/</span> <span style="text-decoration: underline;">_underline_</span> <span style="background-color: #16161D;">~verbatim~</span> <span style="text-decoration: line-through;">+strike-through+</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Individual words can be <b>bolded</b> with stars, <i>italicized</i> with forward slashes, and <span class="underline">underlined</span> with underscores. Also, there is <code>verbatim</code> and <del>strike-through</del>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org170175c" class="outline-2">
+<h2 id="org170175c"><span class="section-number-2">5.</span> <span class="todo TODO">TODO</span> Write this blogpost</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-org"><span style="font-weight: bold;">-</span><span style="color: #1f1f28; background-color: #1f1f28;"> </span><span style="color: #658594; font-weight: bold; text-decoration: line-through;">[X]</span><span style="color: #658594; text-decoration: line-through;"> Document Metadata</span>
+<span style="font-weight: bold;">-</span><span style="color: #1f1f28; background-color: #1f1f28;"> </span><span style="color: #658594; font-weight: bold; text-decoration: line-through;">[X]</span><span style="color: #658594; text-decoration: line-through;"> Headings</span>
+<span style="font-weight: bold;">-</span><span style="color: #1f1f28; background-color: #1f1f28;"> </span><span style="color: #658594; font-weight: bold; text-decoration: line-through;">[X]</span><span style="color: #658594; text-decoration: line-through;"> Lists</span>
+<span style="font-weight: bold;">-</span><span style="color: #1f1f28; background-color: #1f1f28;"> </span><span style="color: #658594; font-weight: bold; text-decoration: line-through;">[X]</span><span style="color: #658594; text-decoration: line-through;"> Todo</span>
+<span style="font-weight: bold;">-</span><span style="color: #1f1f28; background-color: #1f1f28;"> </span><span style="font-weight: bold;">[ ]</span> Not Done
+</pre>
+</div>
+<ul class="org-ul">
+<li class="on"><code>[X]</code> Document Metadata</li>
+<li class="on"><code>[X]</code> Headings</li>
+<li class="on"><code>[X]</code> Lists</li>
+<li class="on"><code>[X]</code> Todo</li>
+<li class="off"><code>[&#xa0;]</code> Not done</li>
+<li class="on"><code>[X]</code> Tables</li>
+<li>You can mark a todo list item as done by going to its line and pressing enter in normal mode</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0b3fb5d" class="outline-2">
+<h2 id="org0b3fb5d"><span class="section-number-2">6.</span> Tables</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #98BB6C; background-color: #2B3328;">#+ATTR_HTML: :frame border</span>
+<span style="color: #87cefa;">|-----------+-----------|</span>
+<span style="color: #87cefa;">| item 1    | item 2    |</span>
+<span style="color: #87cefa;">| item 1, 2 | itme 2, 2 |</span>
+<span style="color: #87cefa;">|-----------+-----------|</span>
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">item 1</td>
+<td class="org-left">item 2</td>
+</tr>
+
+<tr>
+<td class="org-left">item 1, 2</td>
+<td class="org-left">itme 2, 2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-orge54f2ea" class="outline-3">
+<h3 id="orge54f2ea"><span class="section-number-3">6.1.</span> Moving</h3>
+<div class="outline-text-3" id="text-6-1">
+<dl class="org-dl">
+<dt>M-a (org-table-beginning-of-field)</dt><dd>Move to beginning of the current table field, or on to the previous field.</dd>
+
+<dt>M-e (org-table-end-of-field)</dt><dd>Move to end of the current table field, or on to the next field.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-org063a7d2" class="outline-3">
+<h3 id="org063a7d2"><span class="section-number-3">6.2.</span> Column and row editing</h3>
+<div class="outline-text-3" id="text-6-2">
+<dl class="org-dl">
+<dt>M-LEFT (org-table-move-column-left)</dt><dd>Move the current column left.</dd>
+
+<dt>M-RIGHT (org-table-move-column-right)</dt><dd>Move the current column right.</dd>
+
+<dt>M-UP (org-table-move-row-up)</dt><dd>Move the current row up.</dd>
+
+<dt>M-DOWN (org-table-move-row-down)</dt><dd>Move the current row down.</dd>
+
+<dt>S-UP/DOWN/RIGHT/LEFT</dt><dd>Move cell by swapping with adjacent cell.</dd>
+
+<dt>M-S-DOWN (org-table-insert-row)</dt><dd>Insert a new row above the current row. With a prefix argument, the line is created below the current one.</dd>
+
+<dt>C-c - (org-table-insert-hline)</dt><dd>Insert a horizontal line below current row. With a prefix argument, the line is created above the current line.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-orge7c243f" class="outline-2">
+<h2 id="orge7c243f"><span class="section-number-2">7.</span> Blocks</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgdcc4e5e" class="outline-3">
+<h3 id="orgdcc4e5e"><span class="section-number-3">7.1.</span> Code Block</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #C0A36E;">#include</span> <span style="color: #98BB6C; font-style: italic;">&lt;stdio.h&gt;</span>
+
+<span style="color: #7AA89F;">int</span> <span style="color: #7E9CD8;">main</span>(<span style="color: #7AA89F;">void</span>)
+{
+  printf(<span style="color: #98BB6C; font-style: italic;">"Helo Code Blocks\n"</span>);
+  <span style="color: #957FB8;">return</span> <span style="color: #E6C384;">0</span>;
+}
+</pre>
+</div>
+
+<pre class="example">
+Helo Code Blocks
+</pre>
+
+
+<ul class="org-ul">
+<li><code>#+begin_src {languge} {options}... #+end_src</code> is used for code blocks</li>
+<li>To execute the code block and get <code>#+RESULTS:</code> use <code>Ctrl-c Ctrl-c</code></li>
+<li>To include the result add option <code>:exports both</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org38c78da" class="outline-3">
+<h3 id="org38c78da"><span class="section-number-3">7.2.</span> Templates</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+<pre class="src src-org">s    #+begin_src ... #+end_src
+e    #+begin_example ... #+end_example
+q    #+begin_quote ... #+end_quote
+v    #+begin_verse ... #+end_verse
+c    #+begin_center ... #+end_center
+l    #+begin_latex ... #+end_latex
+L    #+latex:
+h    #+begin_html ... #+end_html
+H    #+html:
+a    #+begin_ascii ... #+end_ascii
+A    #+ascii:
+i    #+index: line
+I    #+include: line
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>just type <code>&lt;{temeplate selector}</code> then <code>&lt;Tab&gt;</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc77e5e6" class="outline-2">
+<h2 id="orgc77e5e6"><span class="section-number-2">8.</span> Links</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+<pre class="src src-nil">[[Links][Links]] format &gt; "[[section title][link title]]"
+</pre>
+</div>
+<ul class="org-ul">
+<li>Go to <a href="#orgb21ab44">2</a></li>
+</ul>
+</div>
+<div id="outline-container-orgd3d5945" class="outline-3">
+<h3 id="orgd3d5945"><span class="section-number-3">8.1.</span> Image</h3>
+<div class="outline-text-3" id="text-8-1">
+
+<div id="orgb6f0939" class="figure">
+<p><img src="/pic/レイン.jpg" alt="レイン.jpg" width="60%"/>
+</p>
+<p><span class="figure-number">Figure 1: </span>lain</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1765335" class="outline-2">
+<h2 id="org1765335"><span class="section-number-2">9.</span> Export</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-org9798d6b" class="outline-3">
+<h3 id="org9798d6b"><span class="section-number-3">9.1.</span> HTML</h3>
+<div class="outline-text-3" id="text-9-1">
+<div class="org-src-container">
+<pre class="src src-org">Ctrl-c Ctrl-e h o
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: rentri</p>
+<p class="date">Created: 2024-07-16 Tue 16:04</p>
+</div>
+
+<footer>
+    <a href="https://landchad.net" class="noline" target="_blank">
+        <img src="https://landchad.net/pix/landchad.gif" alt="">
+    </a>
+    <a href="https://wiby.me" class="noline" target="_blank">
+        <img src="https://wiby.me/about/wiby.gif" alt="">
+    </a>
+    <a href="https://thepiratebay.org/index.html" class="noline" target="_blank">
+        <img src="/misc/piracy.gif" alt="">
+    </a>
+    <img src="/pic/TV_Lain.gif" alt="Footer Image" class="footer-img">
+    <p>&copy; 2024 rentri. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
