@@ -25,6 +25,7 @@ body {
 
 .header .bar-one {
   flex: 1;
+  color: #3DB7BB ;
   /* background-color: antiquewhite; */
 }
 
@@ -32,7 +33,7 @@ body {
   display: flex;
   /* background-color:#767e89; */
   border-radius: 2em;
-  padding: 4px;
+  /* padding: 4px; */
   align-items: left;
   justify-content: left;
 }
@@ -45,7 +46,7 @@ body {
 .bar-two div {
   display: flex;
   border-radius: 2em;
-  padding: 4px;
+  /* padding: 4px; */
   align-items: center;
   justify-content: center;
 }
@@ -53,6 +54,8 @@ body {
 
 .header .bar-three {
   flex: 1;
+  /* color: #7CFFA3; */
+  color: #FF6A00;
   /* background-color: aqua; */
 }
 
@@ -60,7 +63,7 @@ body {
   display: flex;
   /* background-color: #767e89; */
   border-radius: 2em;
-  padding: 4px;
+  /* padding: 4px; */
   align-items: right;
   justify-content: right;
 }
@@ -109,37 +112,75 @@ pre {
 }
 
 
-/* .image-container {
-  position: relative;
-  display: inline-block;
-  width: 100%;
+/* MAIN */
+
+.main {
+  /* background-color: red; */
+  width: auto;
+  height: 500px;
+  margin: 8px;
+  margin-top: 86px;
+  color: aliceblue;
 }
 
-.image-container img {
-  width: 100%; 
-  height: auto;
-  pointer-events: none;
+.self {
+  flex: 1;
+  /* background-color: cyan; */
 }
 
-.rentri {
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  transform: translate(-60%, -60%);
+.image {
+  /* background-color: bisque; */
+  margin-left: auto;
+  width: 220px;
+  text-align: center;
 }
 
-.rentri a {
-  text-decoration: none;
-  color: inherit;
+.image img {
+  width: 200px;
+  border-radius: 50%;
 }
 
-.rentri a:hover {
-  text-decoration: underline;
-} */
+.image p {
+  margin: 0px;
+  padding: 0px;
+  font-size: smaller;
+  background-color: blue;
+}
+
+.main .info-container {
+  display: flex;
+}
+
+.info-self {
+  margin: 4px;
+  flex: 3;
+  /* flex-direction: column; */
+  border-left:2px dashed #7CFFA3;
+  /* background-color: blue; */
+  padding-left: 8px;
+}
+
+.name,
+.info {
+  width: 70%;
+  /* background-color: blanchedalmond; */
+}
+
 
 /* RESPONSIVE */
 
 @media only screen and (max-width: 1000px) {
+  /* HEADER */
+  .header {
+    padding: 0px;
+  }
+
+  .header h3 {
+    font-size: small;
+  }
+
+  /* HERO */
+
   .hero .present-time {
     width: 230px;
     margin-left: auto;
@@ -156,5 +197,30 @@ pre {
 
   pre {
     font-size: 3px;
+  }
+
+  /* MAIN */
+
+  .image {
+    width: 80px;
+    /* background-color: red; */
+  }
+  
+  .image img {
+    width: 80px;
+  }
+
+  .image p {
+    font-size: xx-small;
+  }
+
+  .info-self {
+
+  }
+
+  .name,
+  .info {
+    width: auto;
+    font-size: x-small;
   }
 }
