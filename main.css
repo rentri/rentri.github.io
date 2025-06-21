@@ -68,21 +68,55 @@ body {
 /* HERO */
 
 .hero {
-  /* background-color: aliceblue; */
+  background-color: aliceblue;
   /* height: 445px; */
-  /* height: 570px; */
+  height: 510px;
   /* display: inline-block; */
 }
 
-.image-container {
+
+.hero .present-day {
+  padding: 8px;
+  /* background-color: pink; */
+}
+
+.hero .present-time {
+  width: 930px;
+  margin-left: auto;
+  padding: 8px;
+  /* background-color: aqua; */
+}
+
+
+pre {
+  color: red;
+  white-space: pre;
+  /* font-size: 10px; */
+} 
+
+.rentri {
+  text-align: center;
+  /* background-color: blueviolet; */
+}
+
+.rentri a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.rentri a:hover {
+  text-decoration: underline;
+}
+
+
+/* .image-container {
   position: relative;
   display: inline-block;
   width: 100%;
 }
 
 .image-container img {
-  /* display: block; */
-  width: 100%; /* or fixed width */
+  width: 100%; 
   height: auto;
   pointer-events: none;
 }
@@ -101,22 +135,26 @@ body {
 
 .rentri a:hover {
   text-decoration: underline;
+} */
+
+/* RESPONSIVE */
+
+@media only screen and (max-width: 1000px) {
+  .hero .present-time {
+    width: 230px;
+    margin-left: auto;
+  }
+
+
+  .hero {
+    height: auto;
+  }
+
+  .rentri h1 {
+    font-size: large;
+  }
+
+  pre {
+    font-size: 3px;
+  }
 }
-
-/* .hero .present-day {
-  padding: 8px;
-  background-color: pink;
-}
-
-.hero .present-time {
-  width: 930px;
-  margin-left: auto;
-  padding: 8px;
-  background-color: aqua;
-}
-
-
-pre {
-  color: red;
-  white-space: pre;
-}  */
