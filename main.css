@@ -1,0 +1,122 @@
+
+body {
+  background-color: #040409;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  padding: 8px;
+  color: aliceblue;
+  /* background-color: red; */
+}
+
+.header a {
+  margin: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+.header .bar-one {
+  flex: 1;
+  /* background-color: antiquewhite; */
+}
+
+.bar-one div {
+  display: flex;
+  /* background-color:#767e89; */
+  border-radius: 2em;
+  padding: 4px;
+  align-items: left;
+  justify-content: left;
+}
+
+.header .bar-two {
+  flex: 2;
+  /* background-color: pink; */
+}
+
+.bar-two div {
+  display: flex;
+  border-radius: 2em;
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.header .bar-three {
+  flex: 1;
+  /* background-color: aqua; */
+}
+
+.bar-three div {
+  display: flex;
+  /* background-color: #767e89; */
+  border-radius: 2em;
+  padding: 4px;
+  align-items: right;
+  justify-content: right;
+}
+
+/* HERO */
+
+.hero {
+  /* background-color: aliceblue; */
+  /* height: 445px; */
+  /* height: 570px; */
+  /* display: inline-block; */
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.image-container img {
+  /* display: block; */
+  width: 100%; /* or fixed width */
+  height: auto;
+  pointer-events: none;
+}
+
+.rentri {
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-60%, -60%);
+}
+
+.rentri a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.rentri a:hover {
+  text-decoration: underline;
+}
+
+/* .hero .present-day {
+  padding: 8px;
+  background-color: pink;
+}
+
+.hero .present-time {
+  width: 930px;
+  margin-left: auto;
+  padding: 8px;
+  background-color: aqua;
+}
+
+
+pre {
+  color: red;
+  white-space: pre;
+}  */
