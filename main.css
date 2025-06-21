@@ -221,6 +221,6 @@ pre {
   .name,
   .info {
     width: auto;
-    font-size: x-small;
+    font-size: smaller;
   }
 }
