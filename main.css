@@ -4,6 +4,10 @@ body {
   font-family: 'JetBrains Mono', monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* HEADER */
 
 .header {
@@ -11,6 +15,7 @@ body {
   padding: 8px;
   color: aliceblue;
   /* background-color: red; */
+  padding-top: 0px;
 }
 
 .header a {
@@ -119,8 +124,30 @@ pre {
   width: auto;
   height: 500px;
   margin: 8px;
-  margin-top: 86px;
+  /* margin-top: 26px; */
+  /* margin-top: 86px; */
   color: aliceblue;
+}
+
+.main .info-container {
+  display: flex;
+}
+
+.about-me {
+  margin: 0px;
+}
+
+.about-me h1 {
+  text-align: center;
+  border-bottom: dashed #FFBF00;
+  font-size: 50px;
+  width: 20%;
+  margin-top: 0px;
+  color:#F4F1DE;
+}
+
+.about-me div {
+  margin-top: 40px;
 }
 
 .self {
@@ -131,6 +158,8 @@ pre {
 .image {
   /* background-color: bisque; */
   margin-left: auto;
+  margin-right: 10px;
+  /* margin-top: 10px; */
   width: 220px;
   text-align: center;
 }
@@ -147,15 +176,12 @@ pre {
   background-color: blue;
 }
 
-.main .info-container {
-  display: flex;
-}
-
 .info-self {
   margin: 4px;
   flex: 3;
   /* flex-direction: column; */
   border-left:2px dashed #7CFFA3;
+  /* border-left: 2px dotted #FFBF00; */
   /* background-color: blue; */
   padding-left: 8px;
 }
@@ -164,6 +190,68 @@ pre {
 .info {
   width: 70%;
   /* background-color: blanchedalmond; */
+}
+
+
+/* PROJECTS */
+
+.projects .title {
+  margin: 0px;
+}
+
+.title h1 {
+  text-align: center;
+  border-bottom: dashed #FFBF00;
+  font-size: 50px;
+  width: 20%;
+  margin-top: 0px;
+  color:#F4F1DE;
+}
+
+.contain {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.cards {
+  color: aliceblue;
+  background-color: blue;
+  margin: 60px;
+  width: 490px;
+  height: 300px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.cards::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  bottom: -12px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+
+  border-left: 2px solid blue;
+  border-bottom: 2px solid blue;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cards .heading {
+  padding: 16px;
+  padding-bottom: 0px;
+  border-bottom: 2px dotted #FFBF00;
+}
+
+.heading p,
+.heading h1 {
+  margin: 0px;
+}
+
+
+.cards .paragraph {
+  padding: 8px;
 }
 
 
@@ -201,6 +289,16 @@ pre {
 
   /* MAIN */
 
+  .about-me h1 {
+    font-size: 30px;
+    width: 50%;
+  }
+
+  .about-me div {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
   .image {
     width: 80px;
     /* background-color: red; */
@@ -214,13 +312,35 @@ pre {
     font-size: xx-small;
   }
 
-  .info-self {
-
-  }
-
   .name,
   .info {
     width: auto;
+    font-size: smaller;
+  }
+
+  /* PROJECTS */
+  
+  .title h1 {
+    font-size: 30px;
+    width: 50%;
+    margin-top: 20px;
+  }
+
+  .cards {
+    width: 300px;
+    margin: 30px;
+    height: auto;
+  }
+
+  .heading h1 {
+    font-size: 25px;
+  }
+
+  .heading p {
+    font-size: xx-small;
+  }
+
+  .paragraph p {
     font-size: smaller;
   }
 }
