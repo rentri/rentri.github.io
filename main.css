@@ -122,8 +122,9 @@ pre {
 .main {
   /* background-color: red; */
   width: auto;
-  height: 500px;
+  height: auto;
   margin: 8px;
+  margin-bottom: 80px;
   /* margin-top: 26px; */
   /* margin-top: 86px; */
   color: aliceblue;
@@ -257,7 +258,7 @@ pre {
 
 /* RESPONSIVE */
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1300px) {
   /* HEADER */
   .header {
     padding: 0px;
@@ -268,7 +269,6 @@ pre {
   }
 
   /* HERO */
-
   .hero .present-time {
     width: 230px;
     margin-left: auto;
@@ -326,9 +326,13 @@ pre {
     margin-top: 20px;
   }
 
+  /* .title div {
+    margin-top: 80px;
+  } */
+
   .cards {
-    width: 300px;
     margin: 30px;
+    width: 90%;
     height: auto;
   }
 
