@@ -198,6 +198,7 @@ pre {
 
 .projects .title {
   margin: 0px;
+  margin-left: 8px;
 }
 
 .title h1 {
@@ -212,17 +213,18 @@ pre {
 .contain {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 
 .cards {
   color: aliceblue;
   background-color: blue;
-  margin: 60px;
-  width: 490px;
-  height: 300px;
+  margin: 30px;
+  width: 400px;
+  height: auto;
   position: relative;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
 }
 
 .cards::after {
@@ -253,12 +255,59 @@ pre {
 
 .cards .paragraph {
   padding: 8px;
+  overflow: scroll;
+}
+
+
+/* FOOTER */
+
+
+.contact {
+  margin-top: 200px;
+  /* background-color: red; */
+  text-align: center;
+  font-size: x-large;
+
+  color: aliceblue;
+  margin-bottom: 6px;
+}
+
+.contact a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact a:hover {
+  color: blue;
+  background-color: #7CFFA3;
+  border-bottom: 2px solid aliceblue;
+}
+
+.stickers {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.stickers img {
+  margin: 4px;
+  height: auto;
+  display: block;
+}
+
+
+.cool-shit {
+  text-align: center;
+  font-size: smaller;
+  background-color: #FFBF00;
+  /* color: #FFBF00; */
+  font-weight: bolder;
 }
 
 
 /* RESPONSIVE */
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1000px) {
   /* HEADER */
   .header {
     padding: 0px;
@@ -326,13 +375,8 @@ pre {
     margin-top: 20px;
   }
 
-  /* .title div {
-    margin-top: 80px;
-  } */
-
   .cards {
-    margin: 30px;
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 
@@ -346,5 +390,13 @@ pre {
 
   .paragraph p {
     font-size: smaller;
+  }
+
+  /* FOOTER */
+}
+
+@media only screen and (max-width: 560px) {
+  .stickers img {
+      width: 100%;
   }
 }
