@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/blogs.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Blog site structure</title>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <a href="/">..</a>
+            <article>
+
+                <p class="post-meta"><time datetime="2025-07-11">11-07-2025</time></p>
+
+
+                <!-- TITLE -->
+                <h1>Blog site structure</h1>
+
+                <!-- Opening Paragaraph -->
+                 <p class="opening">
+                    Opening Paragraph<sup id="fnref:1"><a href="#fn:1">1</a></sup> lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem autem tempore voluptate eos, quasi doloribus nam dicta, officiis accusamus inventore neque voluptas facilis. Est dolorum quos deleniti libero fuga magni?
+                 </p>
+
+
+                 <!-- FOOTNOTES -->
+                 <div class="hr-div">
+                    footnotes
+                 </div>
+                 <div class="footnotes">
+                    <ol>
+                        <li>
+                            <p id="fn:1">It has a bg of #bada3b! <a href="#fnref:1">⮐</a></p>
+                        </li>
+                    </ol>
+                 </div>
+
+
+                 <!-- TAGS -->
+                <div class="hr-div">
+                    tags
+                </div>
+                <div class="tags">
+                    <ul>
+                        <a href="" class="category"><span>#</span>misc</a> 
+                        <a href="" class="category"><span>#</span>web</a> 
+                    </ul>
+                </div>
+
+
+                <!-- COMMENTS -->
+                <div id="giscus"></div>
+                <script src="https://giscus.app/client.js"
+                        data-repo="your-username/your-repo"
+                        data-repo-id="REPO_ID"
+                        data-category="General"
+                        data-category-id="CATEGORY_ID"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-theme="dark"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+
+
+            </article>
+        </div>
+    </div>
+</body>
+</html>

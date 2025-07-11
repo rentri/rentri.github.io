@@ -1,0 +1,140 @@
+html, 
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+body {
+    background-color: #0f0700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: aliceblue;
+}
+
+::selection {
+  background-color: #5f5fff; 
+  /* background-color: #dbfa3c; */
+  color: #f0f8ff;       
+  /* color:#0f0700 */
+}
+
+
+.main {
+    min-height: 100vh;
+}
+
+
+a {
+    color: #90ee90;  
+    /* color: #473BF0; */
+}
+
+
+h3 {
+    border-bottom: 1px solid;
+    border-bottom-color: #444448;
+}
+
+h4 {
+    margin: 4px;
+}
+
+header h1 {
+    margin-bottom: 0px;
+}
+
+hr {
+    margin-top: 1px;
+}
+
+header img {
+    height: 1em;
+    vertical-align: middle;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 4rem 2rem;;
+}
+
+
+.category {
+    text-decoration: none;
+    color: aliceblue;
+    display: inline-block;
+    padding-bottom: .5em;
+}
+
+.category span {
+    color: blueviolet;
+}
+
+.category:hover {
+    text-decoration: underline ;
+    /* color: blueviolet; */
+}
+
+.rss {
+    color: #ff6f00;
+}
+
+
+.root::marker {
+    content: "> ";
+    color: red;
+    font-size: 1.2em;
+}
+
+.post::marker {
+    content: "~ ";
+    color: #5dade2;
+    font-size: 1.2em;
+}
+
+.branch h3 {
+    border-bottom: none;
+}
+
+.branch::marker {
+    content: "#";
+    color:#5dade2;
+    font-size: 1.2em;
+}
+
+
+.guide::marker {
+    content: "* ";
+    color:darksalmon;
+}
+
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color:#5f5fff
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
+
+/* Style the label as a button */
+.link-button {
+  cursor: pointer;
+  font-size: .8rem;
+  user-select: none;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.link-button a {
+    color: aliceblue
+}
+
+.link-button a:hover {
+    color: #90ee90;
+}
