@@ -50,6 +50,16 @@ a {
     color: #90ee90;
 }
 
+.tags a {
+    gap: 0.3em;
+    white-space: nowrap;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 0.2em 0.5em;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
 .hr-div {
     display: flex;
     align-items: center;
@@ -84,4 +94,93 @@ a {
 .category:hover {
     text-decoration: underline ;
     /* color: blueviolet; */
+}
+
+
+.post::marker {
+    content: "~ ";
+    color: #5dade2;
+    font-size: 1.2em;
+}
+
+
+.filter-ui fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  border: 1px solid #444;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.filter-ui fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  white-space: nowrap;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  padding: 0.2em 0.5em;
+  font-size: 0.9em;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+fieldset {
+    margin: 10px;
+    border-color: #aaa;
+}
+
+fieldset legend {
+    color: #aaa;
+}
+
+fieldset span {
+    color: blueviolet;
+}
+
+/* Checkbox and radio buttons */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  background-color: #0f0700;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+/* Circle for radio */
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+/* Checked state */
+input[type="checkbox"]:checked::after,
+input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 0.5em;
+  height: 0.5em;
+  background-color: #90ee90;
+  border-radius: 50%;
+}
+
+/* Circle or tick box depending on input */
+input[type="checkbox"]:checked::after {
+  border-radius: 2px;
+}
+
+@media only screen and (max-width: 500px) {
+    .container {
+        /* width: 100%; */
+        margin: 0.5em auto;
+        padding: 0.7em;
+    }
 }

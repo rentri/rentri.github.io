@@ -64,7 +64,15 @@ header img {
     text-decoration: none;
     color: aliceblue;
     display: inline-block;
-    padding-bottom: .5em;
+    /* padding-bottom: .5em; */
+    margin-bottom: 0.5em;
+    gap: 0.1em;
+    white-space: nowrap;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 0.1em 0.2em;
+    font-size: 0.9em;
+    cursor: pointer;
 }
 
 .category span {
@@ -75,6 +83,7 @@ header img {
     text-decoration: underline ;
     /* color: blueviolet; */
 }
+
 
 .rss {
     color: #ff6f00;
@@ -97,6 +106,14 @@ header img {
     border-bottom: none;
 }
 
+.guide a {
+    color: #FFBF00;
+}
+
+.fav-project a {
+    color: #5dade2;
+}
+
 .branch::marker {
     content: "#";
     color:#5dade2;
@@ -105,10 +122,16 @@ header img {
 
 
 .guide::marker {
-    content: "* ";
-    color:darksalmon;
+    content: "[] ";
+    color: #FFBF00;
+    /* font-size: 1.2em; */
 }
 
+.fav-project::marker {
+    content: "* ";
+    color: #5dade2;
+    font-size: 1.2em;
+}
 
 .cursor {
   display: inline-block;
@@ -137,4 +160,12 @@ header img {
 
 .link-button a:hover {
     color: #90ee90;
+}
+
+@media only screen and (max-width: 500px) {
+    .container {
+        /* width: 100%; */
+        margin: 0.5em auto;
+        padding: 0.7em;
+    }
 }

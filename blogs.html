@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/blogs.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Blog site structure</title>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <a href="/">..</a>
+            <h2>Post(s)</h2>
+            <hr>
+
+            <div class="filter-ui">
+
+                <fieldset>
+                    <legend>Filter by Tags</legend>
+                    <label><input type="checkbox" value="linux"> <span>#</span>linux</label>
+                    <label><input type="checkbox" value="webdev"> <span>#</span>webdev</label>
+                    <label><input type="checkbox" value="project"> <span>#</span>project</label>
+                    <label><input type="checkbox" value="tools"> <span>#</span>tools</label>
+                    <label><input type="checkbox" value="iot"> <span>#</span>iot</label>
+                    <label><input type="checkbox" value="proglang"> <span>#</span>proglang</label>
+                    <label><input type="checkbox" value="lowlevel"> <span>#</span>lowlevel</label>
+                    <label><input type="checkbox" value="security"> <span>#</span>security</label>
+                    <label><input type="checkbox" value="science"> <span>#</span>science</label>
+                    <label><input type="checkbox" value="coolsites"> <span>#</span>coolsites</label>
+                    <label><input type="checkbox" value="meta"> <span>#</span>meta</label>
+                    <label><input type="checkbox" value="misc"> <span>#</span>misc</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Filter Mode</legend>
+                    <label><input type="radio" name="mode" value="or" checked> OR</label>
+                    <label><input type="radio" name="mode" value="and"> AND</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Sort Order</legend>
+                    <label><input type="radio" name="sort" value="newest" checked> Newest First</label>
+                    <label><input type="radio" name="sort" value="oldest"> Oldest First</label>
+                </fieldset>
+            </div>
+
+
+
+            <ul id="post-list">
+
+                <!-- add new blog here -->
+
+
+                <li class="post" data-date="2025-7-11" data-tags="site_talk,misc">
+                    <span>11-07-2025</span>
+                    <a href="/posts/blog-site-structure.html">Blog site structure</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <script src="scripts/url_tag.js"></script>
+
+    <script src="scripts/filter.js" defer></script>
+
+
+
+</body>
+</html>
