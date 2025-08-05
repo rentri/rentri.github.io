@@ -10,7 +10,18 @@ body {
     font-family: 'JetBrains Mono', monospace;
     font-size: 16px;
     color: aliceblue;
+    background-image: 
+        linear-gradient(0deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
+    background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
+
+
+   text-shadow: 0 0 2px rgba(160, 160, 255, 0.6);
+   /* text-shadow: 0 0 2px ;  */
 }
+
 
 ::selection {
   background-color: #5f5fff; 
@@ -27,12 +38,12 @@ body {
 
 a {
     color: #90ee90;  
-    /* color: #473BF0; */
+    /* color: #5dade2; */
 }
 
 
 h3 {
-    border-bottom: 1px solid;
+    /* border-bottom: 1px solid; */
     border-bottom-color: #444448;
 }
 

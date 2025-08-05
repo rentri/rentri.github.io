@@ -12,30 +12,16 @@
         <div class="container">
             <a href="/">..</a>
             <h2>Post(s)</h2>
-            <hr>
+            <!-- <hr> -->
 
             <div class="filter-ui">
 
                 <fieldset>
-                    <legend>Filter by Tags</legend>
-                    <label><input type="checkbox" value="linux"> <span>#</span>linux</label>
-                    <label><input type="checkbox" value="webdev"> <span>#</span>webdev</label>
-                    <label><input type="checkbox" value="project"> <span>#</span>project</label>
-                    <label><input type="checkbox" value="tools"> <span>#</span>tools</label>
-                    <label><input type="checkbox" value="iot"> <span>#</span>iot</label>
-                    <label><input type="checkbox" value="proglang"> <span>#</span>proglang</label>
-                    <label><input type="checkbox" value="lowlevel"> <span>#</span>lowlevel</label>
-                    <label><input type="checkbox" value="security"> <span>#</span>security</label>
-                    <label><input type="checkbox" value="science"> <span>#</span>science</label>
-                    <label><input type="checkbox" value="coolsites"> <span>#</span>coolsites</label>
-                    <label><input type="checkbox" value="meta"> <span>#</span>meta</label>
-                    <label><input type="checkbox" value="misc"> <span>#</span>misc</label>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Filter Mode</legend>
-                    <label><input type="radio" name="mode" value="or" checked> OR</label>
-                    <label><input type="radio" name="mode" value="and"> AND</label>
+                    <!-- <legend>Search</legend> -->
+                    <div class="search-wrapper">
+                        <input type="text" id="search-input" placeholder="Search" />
+                        <button id="clear-search" type="button" aria-label="Clear search">&times;</button>
+                    </div>
                 </fieldset>
 
                 <fieldset>
@@ -52,16 +38,14 @@
                 <!-- add new blog here -->
 
 
-                <li class="post" data-date="2025-7-11" data-tags="site_talk,misc">
-                    <span>11-07-2025</span>
-                    <a href="/posts/blog-site-structure.html">Blog site structure</a>
+                <li class="post" data-date="2025-08-05" data-tags="site_talk,misc">
+                    05-08-2025
+                    <a href="/posts/Crackme_45exiles_Shuffle.html">Crackme: 45exile's Shuffle</a>
                 </li>
 
             </ul>
         </div>
     </div>
-
-    <script src="scripts/url_tag.js"></script>
 
     <script src="scripts/filter.js" defer></script>
 

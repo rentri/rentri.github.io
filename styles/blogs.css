@@ -10,6 +10,16 @@ body {
     font-family: 'JetBrains Mono', monospace;
     font-size: 16px;
     color: aliceblue;
+
+    background-image: 
+        linear-gradient(0deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
+    background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
+
+
+   text-shadow: 0 0 2px rgba(160, 160, 255, 0.6);
 }
 
 ::selection {
@@ -27,7 +37,7 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 640px;
+    max-width: 720px;
     padding: 4rem 2rem;;
 }
 
@@ -36,15 +46,39 @@ body {
 }
 
 
-.opening {
-    background-color: #bada3b;
-    color: black;
+code {
+    overflow: scroll;
 }
 
-
-sup a {
-    color: red;
+pre {
+  white-space: pre;            
+  overflow-x: auto;            
+  background: #40409c;
+  /* background: #1a0d04; */
+  color: #f0f0ff;
+  text-shadow: none;
+  padding: 1em;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  max-width: 100%;
+  box-sizing: border-box;
+      background-image: 
+        linear-gradient(0deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
+    background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
 }
+
+span {
+    background: #223344;
+    color: #e8f4ff;
+    text-shadow: none;
+    font-family: monospace;
+}
+
 
 a {
     color: #90ee90;
@@ -73,10 +107,6 @@ a {
     content: "";
     flex: 1;
     border-top: 1px solid #555; /* line color */
-}
-
-.footnotes a {
-    color: red;
 }
 
 
@@ -172,12 +202,57 @@ input[type="radio"]:checked::after {
   border-radius: 50%;
 }
 
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+#search-input {
+    box-sizing: border-box;
+  width: 100%;
+  padding: 0.4em 2em 0.4em 0.6em;
+  background-color: #0f0700;
+  color: #FFBF00; /* amber */
+  border: 1px solid #333;
+  font-family: monospace;
+  font-size: 1em;
+  outline: none;
+}
+
+#search-input::placeholder {
+  color: #aaa; /* muted amberish placeholder */
+}
+
+#clear-search {
+  position: absolute;
+  right: 0.6em;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  color: #FFBF00;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+  line-height: 1;
+}
+
+
+
+
 /* Circle or tick box depending on input */
 input[type="checkbox"]:checked::after {
   border-radius: 2px;
 }
 
 @media only screen and (max-width: 500px) {
+
+    body {
+        font-size: medium;
+    }
     .container {
         /* width: 100%; */
         margin: 0.5em auto;

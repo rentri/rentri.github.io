@@ -1,31 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // get all inputs and posts
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const modeRadios = document.querySelectorAll('input[name="mode"]');
+  const searchInput = document.getElementById('search-input');
+  const clearBtn = document.getElementById('clear-search');
   const sortRadios = document.querySelectorAll('input[name="sort"]');
   const postList = document.getElementById('post-list');
   const posts = Array.from(postList.querySelectorAll('.post'));
 
   function updateDisplay() {
-    // find which tags are selected
-    const selectedTags = [];
-    for (let i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) {
-        selectedTags.push(checkboxes[i].value);
-      }
-    }
+    const query = searchInput.value.trim().toLowerCase();
 
-    // find selected mode ('or' or 'and')
-    let mode = 'or';
-    for (let i = 0; i < modeRadios.length; i++) {
-      if (modeRadios[i].checked) {
-        mode = modeRadios[i].value;
-        break;
-      }
-    }
-
-
-    // find selected sort ('newest' or 'oldest')
+    // Get sort option
     let sort = 'newest';
     for (let i = 0; i < sortRadios.length; i++) {
       if (sortRadios[i].checked) {
@@ -34,35 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // filter posts
+    // Filter posts
     posts.forEach(function (post) {
-      const postTags = post.dataset.tags.split(',');
-      let match = false;
-
-      if (selectedTags.length === 0) {
-        match = true; // show all if no tags selected (sletedTags.length  === 0 is true)
-      } else if (mode === 'or') {
-        for (let i = 0; i < selectedTags.length; i++) {
-          if (postTags.indexOf(selectedTags[i]) !== -1) {
-            match = true;
-            break;
-          }
-        }
-      } else { // mode === 'and'
-        match = true;
-        for (let i = 0; i < selectedTags.length; i++) {
-          if (postTags.indexOf(selectedTags[i]) === -1) {
-            match = false;
-            break;
-          }
-        }
-      }
-
-      // show or hide post
+      const content = post.textContent.toLowerCase();
+      const match = content.includes(query);
       post.style.display = match ? '' : 'none';
     });
 
-    // sort visible posts
+    // Sort visible posts
     const visiblePosts = posts.filter(function (post) {
       return post.style.display !== 'none';
     });
@@ -70,29 +32,32 @@ document.addEventListener("DOMContentLoaded", function () {
     visiblePosts.sort(function (a, b) {
       const d1 = new Date(a.dataset.date);
       const d2 = new Date(b.dataset.date);
-      if (sort === 'newest') {
-        return d2 - d1;
-      } else {
-        return d1 - d2;
-      }
+      return sort === 'newest' ? d2 - d1 : d1 - d2;
     });
 
-    // re-append sorted posts to the list
+    // Re-append sorted posts
     visiblePosts.forEach(function (post) {
       postList.appendChild(post);
     });
   }
 
-  // run for url_tag.js
+  // Initial run
   updateDisplay();
 
-  // event listeners
-  for (let i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].addEventListener('change', updateDisplay);
-  }
-  for (let i = 0; i < modeRadios.length; i++) {
-    modeRadios[i].addEventListener('change', updateDisplay);
-  }
+  // Search input listener
+  searchInput.addEventListener('input', () => {
+    clearBtn.style.display = searchInput.value ? 'inline' : 'none';
+    updateDisplay();
+  });
+
+  // Clear button listener
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    clearBtn.style.display = 'none';
+    updateDisplay();
+  });
+
+  // Sort radio listener
   for (let i = 0; i < sortRadios.length; i++) {
     sortRadios[i].addEventListener('change', updateDisplay);
   }
