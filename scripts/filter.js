@@ -8,57 +8,74 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateDisplay() {
     const query = searchInput.value.trim().toLowerCase();
 
-    // Get sort option
     let sort = 'newest';
-    for (let i = 0; i < sortRadios.length; i++) {
+    let i = 0;
+    while (i < sortRadios.length) {
       if (sortRadios[i].checked) {
         sort = sortRadios[i].value;
         break;
+      } else {
+        i++;
       }
     }
 
-    // Filter posts
-    posts.forEach(function (post) {
-      const content = post.textContent.toLowerCase();
-      const match = content.includes(query);
-      post.style.display = match ? '' : 'none';
-    });
+    let j = 0;
+    while (j < posts.length) {
+      const content = posts[j].textContent.toLowerCase();
+      if (content.includes(query)) {
+        posts[j].style.display = '';
+      } else {
+        posts[j].style.display = 'none';
+      }
+      j++;
+    }
 
-    // Sort visible posts
-    const visiblePosts = posts.filter(function (post) {
-      return post.style.display !== 'none';
-    });
+    let visiblePosts = [];
+    let k = 0;
+    while (k < posts.length) {
+      if (posts[k].style.display !== 'none') {
+        visiblePosts.push(posts[k]);
+      }
+      k++;
+    }
 
     visiblePosts.sort(function (a, b) {
       const d1 = new Date(a.dataset.date);
       const d2 = new Date(b.dataset.date);
-      return sort === 'newest' ? d2 - d1 : d1 - d2;
+      if (sort === 'newest') {
+        return d2 - d1;
+      } else {
+        return d1 - d2;
+      }
     });
 
-    // Re-append sorted posts
-    visiblePosts.forEach(function (post) {
-      postList.appendChild(post);
-    });
+    let l = 0;
+    while (l < visiblePosts.length) {
+      postList.appendChild(visiblePosts[l]);
+      l++;
+    }
   }
 
-  // Initial run
   updateDisplay();
 
-  // Search input listener
-  searchInput.addEventListener('input', () => {
-    clearBtn.style.display = searchInput.value ? 'inline' : 'none';
+  searchInput.addEventListener('input', function () {
+    if (searchInput.value) {
+      clearBtn.style.display = 'inline';
+    } else {
+      clearBtn.style.display = 'none';
+    }
     updateDisplay();
   });
 
-  // Clear button listener
-  clearBtn.addEventListener('click', () => {
+  clearBtn.addEventListener('click', function () {
     searchInput.value = '';
     clearBtn.style.display = 'none';
     updateDisplay();
   });
 
-  // Sort radio listener
-  for (let i = 0; i < sortRadios.length; i++) {
-    sortRadios[i].addEventListener('change', updateDisplay);
+  let m = 0;
+  while (m < sortRadios.length) {
+    sortRadios[m].addEventListener('change', updateDisplay);
+    m++;
   }
 });
