@@ -44,9 +44,9 @@ No... Maybe another time !
 .
 .
 </pre>
-               These couple of strings look interseting, we can clearly see the strings used for password logic here. <br> <br>
+               These strings look interesting, we can clearly see some strings used in the password logic. <br> <br>
                However both <span>Gommage</span> and <span>Ygta_u3G_t0h_0aG_r3</span> are not the password. <br> <br>
-               The next bet is to open it in an online available decompiler explorer like <a href="https://dogbolt.org/">dogbolt</a>. <br>
+               The next step is to open the binary in an online available decompiler explorer like <a href="https://dogbolt.org/">dogbolt</a>. <br>
                <br>
                Using the Hex-Rays decompiler I got the pseudo code and located the main function.
                <pre>
@@ -93,9 +93,9 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
                   <br> <br>
                   <span>s[strcspn(s, "\r\n")] = 0;</span> here <span>strcspn</span> gives the index of <span>\r\n</span><sup id="fnref:1"><a href="#fn:1" style="text-decoration: none;"">[1]</a></sup>
                   <br>
-                  Thus we have <span>s[index] = '\0';</span> where <span>\0</span><sup id="fnref:2"><a href="#fn:2" style="text-decoration: none;"">[2]</a></sup> is a null terminator, we are setting the character at index to a null terminator.
+                  Thus we have <span>s[index] = '\0';</span> where <span>\0</span><sup id="fnref:2"><a href="#fn:2" style="text-decoration: none;"">[2]</a></sup> is a null terminator, we are setting the character at given index to a null terminator.
                   <br> <br>
-                  <span>strncpy(dest, s, 0xFFu);</span> copies upto 255 characters from <span>s</span> to <span>dest</span>
+                  <span>strncpy(dest, s, 0xFFu);</span> copies upto 255 characters from <span>s</span> to <span>dest</span>,
                   <br>
                   <span>0xFFu</span> is hexadecimal for 255 <br>
                   More on <a href="https://en.cppreference.com/w/c/string/byte/strncpy">strncpy</a>
@@ -105,7 +105,7 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
                   Now comes the <span>for</span> loop. The loop starts from <span>i=0</span> and goes till <span>i=6</span> as length of "Gommage" is 7. <br>
                   The program had previously declared a varibale <span>v4</span> with value 0. Inside the loop <span>v4</span> will have the value of whatever 
                   <span>31 * v4 + aGommage[i];</span> gives when the loop finishes. <br>
-                  <span>aGommage[i]</span> is quite confusing, it most probably is the ordinal value of character in string "Gommage"
+                  <span>aGommage[i]</span> is quite confusing, it most probably is the ordinal value of characters in string "Gommage"
                   <br> <br>
                   Next we have <span>v6 = strlen(dest);</span>, which basically means that <span>v6</span> is an int having value equal to the length of <span>dest</span>
                   which is a cleaned user input.
@@ -171,13 +171,13 @@ void __fastcall sub_1249(__int64 a1, int a2, unsigned int a3)
                <br> <br>
                As <span>a1</span> is user input <span>v4 = *(_BYTE *)(i + a1);</span><sup id="fnref:3"><a href="#fn:3" style="text-decoration: none;"">[3]</a></sup> is equivalent to <span>v4 = input[i]</span>
                <br> <br>
-               The next line basically is <span>input[i] = input[v3 % (i+1)]</span> , <span>v3</span> here is randmon number given by <span>rand()</span>.
+               The next line basically is <span>input[i] = input[v3 % (i+1)]</span>, here <span>v3</span> is a randmon number given by <span>rand()</span>.
                <br>
                The value of <span>v3 % (i+1)</span> is in range of <span>0<= v3 % (i+1) <= i</span>
                <br> <br>
                Next line basically is <span>input[v3 % (i+1)]</span> which is equal to <span>v4</span>
                <br>
-               This means that <span>input[v3 % (i+1)] = v4</span>, which telss us that <span>v4</span> is just a temp placeholder to save value of <span>input[i]</span> at the start.
+               This means that <span>input[v3 % (i+1)] = v4</span>, which tells us that <span>v4</span> is just a temp placeholder to save value of <span>input[i]</span> at the start.
                <br> <br>
                From all this we can conclude that when the <span>sub_1249</span> function finsihes execution the value of <span>dest</span> at memory address <span>(__int64)dest</span>
                will change.
@@ -206,13 +206,13 @@ return 0;
                <p>
                   Its time to write the keygen, we have to reverse the mutation done by <span>sub_1249</span>
                   <br> <br>
-                  We already have the script to generate the seed, but the issue is that the <span>rand</span> function in C and will give diff randomness compared to python.
+                  We already have the script to generate the seed, but the issue is that the <span>rand</span> function is in C and will give different randomness compared to python.
                   <br> <br>
-                  We need to look C equivalent in python<sup id="fnref:4"><a href="#fn:4" style="text-decoration: none;"">[4]</a></sup>
+                  We need to look for a C equivalent in python<sup id="fnref:4"><a href="#fn:4" style="text-decoration: none;"">[4]</a></sup>
                   <br> <br>
-                  That is <span>ctypes</span> module.
+                  Which is the <span>ctypes</span> module.
                   <br> <br>
-                  Lets take small steps, first lets try emulate the <span>sub_1249</span> function in python.
+                  Lets try to emulate the <span>sub_1249</span> function in python.
                <pre>
 # mutator.py
 from ctypes import CDLL
@@ -284,7 +284,7 @@ for i, x in reversed(set_of_swaps):
 output = ''.join(user_input)
 print(output)
 </pre>
-               When we give the keygen the input <span>rrentin</span> we expect an output of <span>rentri</span>
+               When we give the keygen the input <span>rretin</span> we expect an output of <span>rentri</span>
                <pre>
  ❯ python3 keygen.py
 Enter the input: rretin
