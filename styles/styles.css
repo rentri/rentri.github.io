@@ -1,182 +1,144 @@
-html, 
+html,
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 body {
-    background-color: #0f0700;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
-    color: aliceblue;
-    background-image: 
-        linear-gradient(0deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
-    background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
+  background-color: #0f0700;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  color: aliceblue;
+  background-image: linear-gradient(
+      0deg,
+      rgba(240, 248, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
+  background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
 
-
-   text-shadow: 0 0 2px rgba(160, 160, 255, 0.6);
-   /* text-shadow: 0 0 2px ;  */
+  text-shadow: 0 0 2px rgba(160, 160, 255, 0.6);
+  line-height: 1.5;
 }
-
 
 ::selection {
-  background-color: #5f5fff; 
-  /* background-color: #dbfa3c; */
-  color: #f0f8ff;       
-  /* color:#0f0700 */
+  background-color: #5f5fff;
+  color: #f0f8ff;
 }
-
 
 .main {
-    min-height: 100vh;
+  min-height: 100vh;
 }
-
 
 a {
-    color: #90ee90;  
-    /* color: #5dade2; */
+  color: #90ee90;
 }
 
-
 h3 {
-    /* border-bottom: 1px solid; */
-    border-bottom-color: #444448;
+  border-bottom-color: #444448;
 }
 
 h4 {
-    margin: 4px;
+  margin: 4px;
 }
 
 header h1 {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 hr {
-    margin-top: 1px;
+  margin-top: 1px;
 }
 
 header img {
-    height: 1em;
-    vertical-align: middle;
+  height: 1em;
+  vertical-align: middle;
 }
 
 .container {
-    margin: 0 auto;
-    max-width: 640px;
-    padding: 4rem 2rem;;
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 4rem 2rem;
 }
-
-
-.category {
-    text-decoration: none;
-    color: aliceblue;
-    display: inline-block;
-    /* padding-bottom: .5em; */
-    margin-bottom: 0.5em;
-    gap: 0.1em;
-    white-space: nowrap;
-    background-color: #1a1a1a;
-    border-radius: 4px;
-    padding: 0.1em 0.2em;
-    font-size: 0.9em;
-    cursor: pointer;
-}
-
-.category span {
-    color: blueviolet;
-}
-
-.category:hover {
-    text-decoration: underline ;
-    /* color: blueviolet; */
-}
-
-
-.rss {
-    color: #ff6f00;
-}
-
 
 .root::marker {
-    content: "> ";
-    color: red;
-    font-size: 1.2em;
+  content: "> ";
+  color: red;
+  font-size: 1.2em;
 }
 
 .post::marker {
-    content: "~ ";
-    color: #5dade2;
-    font-size: 1.2em;
+  content: "~ ";
+  color: #5dade2;
+  font-size: 1.2em;
 }
 
 .branch h3 {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .guide a {
-    color: #FFBF00;
+  color: #ffbf00;
 }
 
 .fav-project a {
-    color: #5dade2;
+  color: #5dade2;
 }
 
 .branch::marker {
-    content: "#";
-    color:#5dade2;
-    font-size: 1.2em;
+  content: "#";
+  color: #5dade2;
+  font-size: 1.2em;
 }
 
-
 .guide::marker {
-    content: "[] ";
-    color: #FFBF00;
-    /* font-size: 1.2em; */
+  content: "[] ";
+  color: #ffbf00;
+  /* font-size: 1.2em; */
 }
 
 .fav-project::marker {
-    content: "* ";
-    color: #5dade2;
-    font-size: 1.2em;
+  content: "* ";
+  color: #5dade2;
+  font-size: 1.2em;
 }
 
 .cursor {
   display: inline-block;
   animation: blink 1s step-end infinite;
-  color:#5f5fff
+  color: #5f5fff;
 }
 
 @keyframes blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
-
-
 
 /* Style the label as a button */
 .link-button {
   cursor: pointer;
-  font-size: .8rem;
+  font-size: 0.8rem;
   user-select: none;
   line-height: 1;
   flex-shrink: 0;
 }
 
 .link-button a {
-    color: aliceblue
+  color: aliceblue;
 }
 
 .link-button a:hover {
-    color: #90ee90;
+  color: #90ee90;
 }
 
 @media only screen and (max-width: 500px) {
-    .container {
-        /* width: 100%; */
-        margin: 0.5em auto;
-        padding: 0.7em;
-    }
+  .container {
+    /* width: 100%; */
+    margin: 0.5em auto;
+    padding: 0.7em;
+  }
 }

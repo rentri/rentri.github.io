@@ -1,58 +1,65 @@
-html, 
+html,
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 body {
-    background-color: #0f0700;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
-    color: aliceblue;
+  background-color: #0f0700;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  color: aliceblue;
 
-    background-image: 
-        linear-gradient(0deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
-    background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
+  background-image: linear-gradient(
+      0deg,
+      rgba(240, 248, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
+  background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
 
+  /* text-shadow: 0 0 2px rgba(160, 160, 255, 0.6); */
 
-   text-shadow: 0 0 2px rgba(160, 160, 255, 0.6);
+  line-height: 1.8;
 }
 
 ::selection {
-  background-color: #5f5fff; 
-  /* background-color: #dbfa3c; */
-  color: #f0f8ff;       
-  /* color:#0f0700 */
+  background-color: #5f5fff;
+  color: #f0f8ff;
 }
-
 
 .main {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-
+.blog,
 .container {
-    margin: 0 auto;
-    max-width: 720px;
-    padding: 4rem 2rem;;
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 4rem 2rem;
+}
+
+.blog {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5); /* subtle glow */
+  border: 1px solid #262626;              /* gives subtle edge */
+  border-radius: 8px;
+  background-color: #222;
 }
 
 .post-meta {
-    text-align: right;
+  text-align: right;
 }
 
-
 code {
-    overflow: scroll;
+  overflow: scroll;
 }
 
 pre {
-  white-space: pre;            
-  overflow-x: auto;            
+  white-space: pre;
+  overflow-x: auto;
   background: #40409c;
   /* background: #1a0d04; */
   color: #f0f0ff;
@@ -64,75 +71,48 @@ pre {
   line-height: 1.4;
   max-width: 100%;
   box-sizing: border-box;
-      background-image: 
-        linear-gradient(0deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
-    background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
+  background-image: linear-gradient(
+      0deg,
+      rgba(240, 248, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(240, 248, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 248, 255, 0.06) 1px, transparent 1px);
+  background-size: 10px 10px, 10px 10px, 40px 40px, 40px 40px;
 }
 
 span {
-    background: #223344;
-    color: #e8f4ff;
-    text-shadow: none;
-    font-family: monospace;
+  background: #223344;
+  color: #e8f4ff;
+  text-shadow: none;
+  font-family: monospace;
 }
-
 
 a {
-    color: #90ee90;
-}
-
-.tags a {
-    gap: 0.3em;
-    white-space: nowrap;
-    background-color: #1a1a1a;
-    border-radius: 4px;
-    padding: 0.2em 0.5em;
-    font-size: 0.9em;
-    cursor: pointer;
+  color: #90ee90;
 }
 
 .hr-div {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #aaa; /* text color */
-    margin: 2em 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #aaa; /* text color */
+  margin: 2em 0;
 }
 
 .hr-div::before,
 .hr-div::after {
-    content: "";
-    flex: 1;
-    border-top: 1px solid #555; /* line color */
+  content: "";
+  flex: 1;
+  border-top: 1px solid #555; /* line color */
 }
-
-
-.category {
-    text-decoration: none;
-    color: aliceblue;
-    display: inline-block;
-    padding-bottom: .5em;
-}
-
-.category span {
-    color: blueviolet;
-}
-
-.category:hover {
-    text-decoration: underline ;
-    /* color: blueviolet; */
-}
-
 
 .post::marker {
-    content: "~ ";
-    color: #5dade2;
-    font-size: 1.2em;
+  content: "~ ";
+  color: #5dade2;
+  font-size: 1.2em;
 }
-
 
 .filter-ui fieldset {
   display: flex;
@@ -156,18 +136,17 @@ a {
   user-select: none;
 }
 
-
 fieldset {
-    margin: 10px;
-    border-color: #aaa;
+  margin: 10px;
+  border-color: #aaa;
 }
 
 fieldset legend {
-    color: #aaa;
+  color: #aaa;
 }
 
 fieldset span {
-    color: blueviolet;
+  color: blueviolet;
 }
 
 /* Checkbox and radio buttons */
@@ -202,7 +181,6 @@ input[type="radio"]:checked::after {
   border-radius: 50%;
 }
 
-
 .search-wrapper {
   position: relative;
   display: inline-block;
@@ -210,11 +188,11 @@ input[type="radio"]:checked::after {
 }
 
 #search-input {
-    box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
   padding: 0.4em 2em 0.4em 0.6em;
   background-color: #0f0700;
-  color: #FFBF00; /* amber */
+  color: #ffbf00; /* amber */
   border: 1px solid #333;
   font-family: monospace;
   font-size: 1em;
@@ -233,15 +211,12 @@ input[type="radio"]:checked::after {
   background: none;
   border: none;
   font-size: 1.2em;
-  color: #FFBF00;
+  color: #ffbf00;
   cursor: pointer;
   display: none;
   padding: 0;
   line-height: 1;
 }
-
-
-
 
 /* Circle or tick box depending on input */
 input[type="checkbox"]:checked::after {
@@ -249,13 +224,12 @@ input[type="checkbox"]:checked::after {
 }
 
 @media only screen and (max-width: 500px) {
-
-    body {
-        font-size: medium;
-    }
-    .container {
-        /* width: 100%; */
-        margin: 0.5em auto;
-        padding: 0.7em;
-    }
+  body {
+    font-size: medium;
+  }
+  .container {
+    /* width: 100%; */
+    margin: 0.5em auto;
+    padding: 0.7em;
+  }
 }

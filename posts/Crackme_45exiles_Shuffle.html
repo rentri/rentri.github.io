@@ -9,7 +9,7 @@
    </head>
    <body>
       <div class="main">
-         <div class="container">
+         <div class="blog">
             <a href="/">..</a>
             <article>
                <p class="post-meta"><time datetime="2025-07-11">05-08-2025</time></p>
@@ -112,7 +112,7 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
                   <br> <br>
                   Just right below we can see a mysterious funtion <span>sub_1249</span> being called which is taking <span>(__int64)dest</span>, <span>v6</span>, <span>v4</span> as parameters.
                   <br>
-                  <br> <br>
+                  <br> 
                   Lets first calculate the value of <span>v4</span> before exploring the mysterious function. <br>
                   The equivalent of the <span>for</span> loop in main in python would look like
                <pre>
@@ -157,32 +157,32 @@ void __fastcall sub_1249(__int64 a1, int a2, unsigned int a3)
                <br> <br>
                From this we can infer that <span>a1</span> is <span>(__int64)dest</span>, <span>a2</span> is <span>v6</span> and <span>a3</span> is <span>v4</span>
                <br> <br>
-               <span>(__int64)dest</span> is the numeric memory address of <span>dest</span> as 64 bit int.
+               <span>(__int64)dest</span> is the a 64-bit pointer to a buffer. 
+               <span>dest</span> now <span>a1</span> is being used as a pointer.
                <br> <br>
                <span>srand(a3)</span> is interesting. From this we finally know what the value of <span>v4</span> now <span>a3</span> is a seed for <span>rand()</span> <br>
                More on <a href="https://en.cppreference.com/w/cpp/numeric/random/srand.html">srand</a>
                <br> <br>
-               The <span>for</span> loop is starting from the length of user input, and decrements till <span>i=1</span>.
+               The <span>for</span> loop is starting from the length of user input <span>a1</span>, and decrements till <span>i=1</span>.
                <br> <br>
                In the loop we first generate a random integer and assign its value to <span>v3</span>. 
                <br> <br>
                Now in <span>sub_1249</span>, <span>v4</span> is above decalred as of type <span>char</span> and it takes the value of 
-               <span>*(_BYTE *)(i + a1);</span> which basically means <span>v4 = input[i]</span>
+               <span>*(_BYTE *)(i + a1);</span> which basically means <span>v4 = a1[i]</span>
                <br> <br>
-               As <span>a1</span> is user input <span>v4 = *(_BYTE *)(i + a1);</span><sup id="fnref:3"><a href="#fn:3" style="text-decoration: none;"">[3]</a></sup> is equivalent to <span>v4 = input[i]</span>
+               As <span>a1</span> is user input <span>v4 = *(_BYTE *)(i + a1);</span><sup id="fnref:3"><a href="#fn:3" style="text-decoration: none;"">[3]</a></sup> is equivalent to <span>v4 = a1[i]</span>
                <br> <br>
-               The next line basically is <span>input[i] = input[v3 % (i+1)]</span>, here <span>v3</span> is a randmon number given by <span>rand()</span>.
+               The next line basically is <span>a1[i] = a1[v3 % (i+1)]</span>, here <span>v3</span> is a randmon number given by <span>rand()</span>.
                <br>
                The value of <span>v3 % (i+1)</span> is in range of <span>0<= v3 % (i+1) <= i</span>
                <br> <br>
-               Next line basically is <span>input[v3 % (i+1)]</span> which is equal to <span>v4</span>
+               Next line basically is <span>a1[v3 % (i+1)]</span> which is equal to <span>v4</span>
                <br>
-               This means that <span>input[v3 % (i+1)] = v4</span>, which tells us that <span>v4</span> is just a temp placeholder to save value of <span>input[i]</span> at the start.
+               This means that <span>a1[v3 % (i+1)] = v4</span>, which tells us that <span>v4</span> is just a temp placeholder to save value of <span>a1[i]</span> at the start.
                <br> <br>
-               From all this we can conclude that when the <span>sub_1249</span> function finsihes execution the value of <span>dest</span> at memory address <span>(__int64)dest</span>
-               will change.
+               As we know, <span>a1</span> is being used as a pointer to a buffer, by the end of the <span>sub_1249</span> function, whatever value that buffer previously held would be mutated.
                <br>
-               As in the above examples input is <span>dest</span>, therefore the fucntion <span>sub_1249</span> mutates the value of user input.
+               As in the above examples input is <span>dest</span> or <span>a1</span>, therefore the fucntion <span>sub_1249</span> mutates the value of user input.
                </p>
                <div class="hr-div">
                   back to main
@@ -340,7 +340,6 @@ Good Job !
                   data-input-position="top"
                   data-theme="noborder_dark" 
                   data-lang="en"
-                  data-loading="lazy"
                   crossorigin="anonymous"
                   async></script>
             </article>
