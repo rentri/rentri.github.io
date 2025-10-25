@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "icon": {
+      "type": "lucide",
+      "name": "gamepad"
+    },
+    "text": "Stratergy Games Enjoyer"
+  },
+  {
+    "id": 2,
+    "icon": {
+      "type": "lucide",
+      "name": "sun"
+    },
+    "type": "lucide",
+    "text": "Praise the Sun"
+  }
+]
