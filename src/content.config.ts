@@ -47,6 +47,17 @@ const workExperience = defineCollection({
   })
 });
 
+const education = defineCollection({
+  loader: file("src/content/education.json"),
+  schema: z.object({
+    id: z.number(),
+    level: z.string(),
+    institute: z.string(),
+    duration: z.string(),
+    description: z.string(),
+  })
+});
+
 const tags = defineCollection({
   loader: file("src/content/tags.json"),
   schema: z.object({
@@ -69,6 +80,15 @@ const posts = defineCollection({
   })
 });
 
+const til = defineCollection({
+  loader: glob({ base: "src/content/til", pattern: "**/*.{md,mdx}" }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    slug: z.string(),
+  })
+});
+
 const projects = defineCollection({
   loader: glob({ base: "src/content/projects", pattern: "**/*.{md,mdx}" }),
   schema: ({ image }) => z.object({
@@ -87,4 +107,4 @@ const projects = defineCollection({
   })
 });
 
-export const collections = { tags, posts, projects, other, quickInfo, socials, workExperience };
+export const collections = { tags, posts, til, projects, other, quickInfo, socials, workExperience, education };

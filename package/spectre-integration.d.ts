@@ -15,6 +15,10 @@ interface OpenGraph {
   */
   home: OpenGraphInfo;
   /**
+    * Data for TIL page.
+    */
+  til: OpenGraphInfo;
+  /**
    * Data for the blog page.
    */
   blog: OpenGraphInfo;

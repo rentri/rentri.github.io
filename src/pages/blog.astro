@@ -44,7 +44,10 @@ const tags = posts.flatMap((post) => post.data.tags.map((tag) => tag.id));
 					<a href={`/blog/${post.id}`} class="post-container" data-tags={post.data.tags.map((tag) => tag.id).join(",")}>
 						<div class="post-header">
 							<h3>{post.data.title}</h3>
-							<span class="post-date">{post.data.createdAt.toLocaleDateString()}</span>
+              <span class="post-date">
+                {post.data.createdAt.toLocaleDateString("en-GB").replace(/\//g, "/")}
+              </span>
+              
 						</div>
 						<span>{post.data.description}</span>
 					</a>

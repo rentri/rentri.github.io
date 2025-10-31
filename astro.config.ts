@@ -26,11 +26,13 @@ const config = defineConfig({
       openGraph: {
         home: {
           title: 'rentri',
-          description: 'A minimalistic theme for Astro.'
+        },
+        til: {
+          title: 'TIL',
+          description: 'Today I Learned'
         },
         blog: {
           title: 'Blog',
-          description: 'News and guides for Spectre.'
         },
         projects: {
           title: 'Projects'

@@ -1,0 +1,23 @@
+---
+title: Base64 encoding
+date: 10-30-2025
+slug: base64
+---
+
+Base64 encoding allows us to encode any bytes to "safe" bytes, bytes which are known to be safe to send
+without getting corrupted. 
+
+Example of "unsafe" bytes would be control characters.
+
+To send text with Base64 encoding we first encode the text to say UTF-8, after that we group the binary into chunks of 3 bytes,
+we further divide the chunks into four 6-bit groups. Now each 6-bit group can represent values between `0` and `63`, 
+these values are then mapped to the corresponding Base64 character.
+
+What if the chunks are not of 3 bytes?
+
+For 1 extra byte we have space left for 2 bytes, we pad the econding with `==`
+
+For 2 extra byte we have space left for 1 byte, we pad the encoding with `=`
+
+The reciever will have to reverse the process to recover the original text.
+

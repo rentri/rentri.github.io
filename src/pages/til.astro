@@ -1,0 +1,117 @@
+---
+import '../styles/article-list.css';
+import '../styles/article.css';
+
+import { getCollection } from "astro:content";
+import Card from "../components/Card.astro";
+import Icon from "../components/Icon.astro";
+import Layout from "../layouts/Layout.astro";
+import { openGraph } from 'spectre:globals';
+import { render } from "astro:content";
+
+const til = await getCollection('til');
+const sorted = til.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<Layout
+	title={openGraph.til.title || "TIL"}
+	description={openGraph.til.description}
+	pagefindIgnore
+>
+  <div class="layout-grid-left" slot="left">
+    <Card class="flex-col-card">
+      <h2 class="no-mt">Today I Learned</h2>
+			<div class="stats-div">
+				<div class="stat">
+					<h3 class="text-glow">{til.length}</h3>
+					<span>Days Learned</span>
+				</div>
+			</div>
+    </Card>
+  </div>
+
+  {await Promise.all(
+    sorted.map(async (til) => {
+        const { Content } = await render(til);
+        const slug = til.data.slug;
+
+        return (
+        <article id={til.data.slug} slot="right" data-pagefind-body>
+            <Card>
+                <div class="header-container">
+                    <h2>{til.data.title}</h2>
+                </div>
+                <span class="post-date">
+  					{til.data.date.toLocaleDateString("en-GB").replace(/\//g, "/")}
+				</span>
+                <a href={`#${slug}`} class="til-link">
+                    <span>COPY LINK</span>
+                </a>
+                <Content />
+            </Card>
+        </article>
+        <br>
+        );
+    })
+    )}
+</Layout>
+
+<script is:inline>
+    document.addEventListener("click", async (e) => {
+        const link = e.target.closest(".til-link");
+        if (!link) return;
+        e.preventDefault();
+
+        const fullUrl = `${window.location.origin}${window.location.pathname}${link.getAttribute("href")}`;
+
+        try {
+        await navigator.clipboard.writeText(fullUrl);
+        link.querySelector("span").textContent = "COPIED!";
+        setTimeout(() => (link.querySelector("span").textContent = "COPY LINK"), 1500);
+        } catch (err) {
+        console.error("Clipboard copy failed", err);
+        }
+    });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const scrollToHash = () => {
+        const { hash } = window.location;
+        if (!hash) return;
+
+        const el = document.querySelector(hash);
+        if (!el) return;
+
+        setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 150);
+        };
+
+        scrollToHash();
+
+        window.addEventListener("hashchange", scrollToHash);
+    });
+</script>
+
+<style>
+	.stats-div {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.stat h3 {
+		font-size: 2em;
+		margin: 0;
+		margin-bottom: .5rem;
+	}
+
+    .til-link,
+    .post-date {
+        font-size: 0.9rem;
+    }
+</style>
