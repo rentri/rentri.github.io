@@ -1,0 +1,9 @@
+---
+title: .bss section stores unintialized varibales
+date: 01-15-2026
+slug: bss
+---
+
+The .data section in ELF binaries is used for holding initialized global or static variables. 
+The local variables are stored in the stack. All the uninitialized global or static variables are stored in the .bss section and 
+occupy no space in the binary, as they are zeroed at runtime.
