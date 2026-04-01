@@ -1,0 +1,20 @@
+---
+title: Why is most audio sampled at 44.1KHz? 
+date: 04-01-2026
+slug: audio-sampling
+---
+
+It is know that human hearing tops at 20Khz. The [Nyquist sampling theorem](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem) states 
+that a digital system can perfectly reproduce any frequency up to half its sample rate.
+
+Therefore to capture every frequency a human can hear we need  Nyquist frequency of 40Khz.
+
+Then why 44.1KHz?
+
+In the early days of digital audio, storing the equivalent of a CD album worth of digital data 
+on a hard drive was not possible because the drives of the time simply did not have sufficient capacity.
+Therefore the video recorders were repurposed to store audio samples as black and white video signals.
+These video recorders ran at 30 frames per second and had 490 useable lines per frame.
+It was decided that 3 audio samples should be stored per line of video.
+
+`3 samples/line * 490 lines/frame * 30 frames/sec = 44100 samples/sec`
