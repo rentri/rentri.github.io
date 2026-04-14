@@ -1,0 +1,105 @@
+---
+title: Chip8 Emulator
+date: 04-14-2026
+description: A Chip8 emulator in golang
+image: "../assets/chip8/chip8.png"
+info:
+  - text: GitHub
+    link: https://github.com/rentri/goChip8
+    icon:
+      type: lucide
+      name: github
+---
+
+# A chip8 emulator written in Golang
+
+## Tech Used
+
+- **[Go (Golang)](https://go.dev/)** – core emulator implementation
+- **[Ebiten](https://ebitengine.org/)** – rendering, game loop, sound output and input handling
+
+## Running the emulator
+
+### Prerequistes
+- go 1.24.4
+
+### Clone the repositry
+```bash
+git clone https://github.com/rentri/goChip8.git
+```
+
+### Run & Build
+```bash
+cd goChip8
+```
+Run without building
+```bash
+go run . <path-to-rom>
+```
+OR
+
+Build
+```bash
+go build -o chip8
+```
+Then run
+```bash
+./chip8 <path-to-rom>
+```
+
+## Showcase
+
+| **Tetris** |
+| :---: |
+| ![Tetris](/src/content/assets/chip8/tetris.gif) |
+
+| **Breakout** |
+| :---: |
+| ![Breakout](/src/content/assets/chip8/breakout.gif) |
+
+| **Space Invaders** |
+| :---: |
+| ![Space Invaders](/src/content/assets/chip8/space-invaders.gif) |
+
+| **Pong** |
+| :---: |
+| ![Pong](/src/content/assets/chip8/pong.gif) |
+
+
+## Tests Passed
+
+  Chip-8 Splash Screen
+  
+  ![Splash Screen](/src/content/assets/chip8/chip8-logo.png)
+
+  IBM LOGO
+  
+  
+  ![IBM Logo](/src/content/assets/chip8/ibm-logo.png)
+    
+  CORAX+ opcode test
+  
+  ![Opcode Test](/src/content/assets/chip8/corax+.png)
+  
+  Flags test
+
+  > Our implementation of SHR and SHL instructions uses modern beavior.
+  > Hence 8XY6 & 8XYE fail the last check.
+  
+  ![Flags Test](/src/content/assets/chip8/flags.png)
+  
+  Quirks test
+
+  ![Quirks Test](/src/content/assets/chip8/quirks.png)
+    
+  Keypad test
+
+  > Some key presses may occasionally not register due to high CPU speed or keyboard polling.
+  > If you press a key when the emulator was not checking if it is pressed, you will experience "key miss", where the press won't be registered.
+  > The slower the emulation speed the higher chance for it to happen.
+  
+  ![Keypad Test](/src/content/assets/chip8/keypad.png)
+
+# Credits 
+- Test ROMs from [Timendus's CHIP-8 Test Suite](https://github.com/Timendus/chip8-test-suite)
+- Reference from [Cowgod's CHIP-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
