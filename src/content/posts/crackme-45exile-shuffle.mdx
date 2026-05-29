@@ -11,7 +11,7 @@ tags:
 
 Solving my first ever crackme [Shuffle](https://crackmes.one/crackme/686f1b56aadb6eeafb399171) by [45exile](https://crackmes.one/user/45exile)
 
-# Reconnaissance 
+## Reconnaissance 
 
 After downloading the crackme I quickly ran it.
 
@@ -78,7 +78,7 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
 }
 ```
 
-# Analysing `main`
+### Analysing `main`
 
 We can see the declaration of variable `s` of type `char` of size 256 characters or 2048 bits as 1 character = 1 byte = 8 bits.  
 Same with `dest`.
@@ -123,7 +123,7 @@ The above code gives the final value of `v4` to be `66294604631`.
 
 We don’t know what this value is being used for yet, for that we need to analyse the mysterious function.
 
-# Analysing `sub_1249`
+### Analysing `sub_1249`
 
 The `sub_1249` function is right above our `main` funtion in the decompiler. Lets take a look.
 
@@ -178,7 +178,7 @@ As we know, `a1` is being used as a pointer to a buffer, by the end of the `sub_
 
 As in the above examples input is `dest` or `a1`, therefore the function `sub_1249` mutates the value of user input.
 
-# Back to `main`
+### Back to `main`
 
 The final piece of the puzzle is:
 
@@ -193,7 +193,7 @@ The function `strcmp` compares `Ygta_u3G_t0h_0aG_r3` with now mutated `dest`
 
 So the password is such a string which when mutated by the funtion `sub_1249` turns into `Ygta_u3G_t0h_0aG_r3`
 
-# Writing Keygen
+## Writing Keygen
 
 Its time to write the keygen, we have to reverse the mutation done by `sub_1249`.
 
@@ -285,7 +285,7 @@ rentri
 
 We do indeed get the expected output `rentri`.
 
-# Final Solution
+## Final Solution
 
 With this our keygen is done. Now all that's left is to test it on `Ygta_u3G_t0h_0aG_r3`
 

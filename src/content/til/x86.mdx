@@ -1,0 +1,28 @@
+---
+title: Why does x86 mean 32-bit?
+date: 05-29-2026
+slug: x86
+---
+
+Well it finally happened... I accidently dowloaded an x86 binary thinking it was 64-bit.
+
+Why on God's green earth is x86 32-bit?
+
+ x64 is well rightfully named 64-bit, then what the hell is amd64? 
+I have a 64-bit Intel machine so should I download the x64 version or amd64? 
+If amd64 exists then what about intel64? 
+And if x86 is 32-bit then why does x32 exist?
+
+Well now I know!
+
+x86 basically refers to the family of Intel processor architecture that was used in PC's such as the 8086, 8088, 286 etc,.
+So the entire architecture family became know as x86, when 32-bit became dominant x86 became synonymous with 32-bit.
+
+x64 is the architecture name for the extension of the x86 instruction set to 64-bit. It was invented by AMD.
+At the same time Intel was working on their 64-bit architecture called Itanium which flopped badly, so they copied AMD's x64, and called their version Intel 64.
+AMD called the x64 architecture x86_64 or amd64 and these name were commonly used in open source tools. The name Intel 64 or EM64T never caught on.
+
+So whenver you have to download any binary for your modern 64-bit computer, if you see a binary for amd64 it **will** run on your intel machine.
+It is the same architecture but has multiple names for it , amd64 (mosly used by the open source and linux community), x86_64 the original official name by AMD, x64 (used in Windows) and Intel 64 which is a dead name used nowhere except inside Intel manuals.
+
+x32 is not associated with hardware, it is an ILP32 variant of the x86-64 System V ABI: 32-bit pointers in 64-bit mode according to [the x32 ABI spec](https://en.wikipedia.org/wiki/X32_ABI). You should not see any binaries or packages named for x32, as it is **NOT** an instruction set.
