@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crackme: 45exile&#39;s Shuffle</title>
+<meta name="description" content="Solving my first ever crackme Shuffle by 45exile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="pageheader">
+    <a href="/">rentri(9)</a>
+    <marquee>
+      No matter where you go, everyone's connected.
+    </marquee>
+  <span style="white-space:nowrap;">User Manual</span>  </div>
+
+  
+<h1>Crackme: 45exile&#39;s Shuffle</h1>
+<div class="post-meta">
+  <span>2025-10-08</span>
+  <span>8 min read</span>
+  <span class="tag">Reverse Engineering</span><span class="tag">crackme</span>
+</div>
+
+<div class="indent">
+<p>Solving my first ever crackme <a href="https://crackmes.one/crackme/686f1b56aadb6eeafb399171">Shuffle</a> by <a href="https://crackmes.one/user/45exile">45exile</a></p>
+<h1 id="reconnaissance" tabindex="-1"><a class="header-anchor" href="#reconnaissance">Reconnaissance</a></h1>
+<p>After downloading the crackme I quickly ran it.</p>
+<div class="codeblock" data-lines="4" id="cb-1">
+  <div class="cb-titlebar">
+    <span class="cb-file">&nbsp;</span>
+    <span class="cb-actions">
+      <span class="cb-lang">bash</span>
+      <button type="button" class="cb-copy" data-target="cb-1" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-1-L1"><span class="ln">1</span><span style="color:#00DAEF">❯</span><span style="color:#FFD493"> ./crackme</span></span>
+<span class="line" data-line="2" id="cb-1-L2"><span class="ln">2</span><span style="color:#00DAEF">Enter</span><span style="color:#FFD493"> the</span><span style="color:#FFD493"> password</span><span style="color:#FFD493"> please</span><span style="color:#FFD493"> :</span></span>
+<span class="line" data-line="3" id="cb-1-L3"><span class="ln">3</span><span style="color:#00DAEF">rentri</span></span>
+<span class="line" data-line="4" id="cb-1-L4"><span class="ln">4</span><span style="color:#00DAEF">No...</span><span style="color:#FFD493"> Maybe</span><span style="color:#FFD493"> another</span><span style="color:#FFD493"> time</span><span style="color:#FFD493"> !</span></span></code></pre></div>
+  
+</div><p>Let’s run <code>strings</code> on it.</p>
+<div class="codeblock" data-lines="11" id="cb-2">
+  <div class="cb-titlebar">
+    <span class="cb-file">&nbsp;</span>
+    <span class="cb-actions">
+      <span class="cb-lang">bash</span>
+      <button type="button" class="cb-copy" data-target="cb-2" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston has-focused cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-2-L1"><span class="ln">1</span><span style="color:#00DAEF">❯</span><span style="color:#FFD493"> strings</span><span style="color:#FFD493"> crackme</span></span>
+<span class="line" data-line="2" id="cb-2-L2"><span class="ln">2</span><span style="color:#EEF0F9">.</span></span>
+<span class="line" data-line="3" id="cb-2-L3"><span class="ln">3</span><span style="color:#EEF0F9">.</span></span>
+<span class="line" data-line="4" id="cb-2-L4"><span class="ln">4</span><span style="color:#00DAEF">Gommage</span></span>
+<span class="line" data-line="5" id="cb-2-L5"><span class="ln">5</span><span style="color:#00DAEF">Enter</span><span style="color:#FFD493"> the</span><span style="color:#FFD493"> password</span><span style="color:#FFD493"> please</span><span style="color:#FFD493"> :</span></span>
+<span class="line" data-line="6" id="cb-2-L6"><span class="ln">6</span></span>
+<span class="line focused" data-line="7" id="cb-2-L7"><span class="ln">7</span><span style="color:#00DAEF">Ygta_u3G_t0h_0aG_r3</span></span>
+<span class="line focused" data-line="8" id="cb-2-L8"><span class="ln">8</span><span style="color:#00DAEF">Good</span><span style="color:#FFD493"> Job</span><span style="color:#FFD493"> !</span></span>
+<span class="line" data-line="9" id="cb-2-L9"><span class="ln">9</span><span style="color:#00DAEF">No...</span><span style="color:#FFD493"> Maybe</span><span style="color:#FFD493"> another</span><span style="color:#FFD493"> time</span><span style="color:#FFD493"> !</span></span>
+<span class="line" data-line="10" id="cb-2-L10"><span class="ln">10</span><span style="color:#EEF0F9">.</span></span>
+<span class="line" data-line="11" id="cb-2-L11"><span class="ln">11</span><span style="color:#EEF0F9">.</span></span></code></pre></div>
+  
+</div><p>These strings look interesting, we can clearly see some strings used in the password logic.</p>
+<p>However both <code>Gommage</code> and <code>Ygta_u3G_t0h_0aG_r3</code> are not the password.</p>
+<p>The next step is to open the binary in an online available decompiler explorer like <a href="https://dogbolt.org/">dogbolt</a>.</p>
+<p>Using the Hex-Rays decompiler I got the pseudo code and located the main function.</p>
+<div class="codeblock" data-lines="29" id="cb-3">
+  <div class="cb-titlebar">
+    <span class="cb-file">Main Pseudocode</span>
+    <span class="cb-actions">
+      <span class="cb-lang">c</span>
+      <button type="button" class="cb-copy" data-target="cb-3" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston has-highlighted cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-3-L1"><span class="ln">1</span><span style="color:#EEF0F98F;font-style:italic">//----- (00000000000012E4) ----------------------------------------------------</span></span>
+<span class="line" data-line="2" id="cb-3-L2"><span class="ln">2</span><span style="color:#EEF0F9">__int64 __fastcall </span><span style="color:#00DAEF">main</span><span style="color:#EEF0F9">(</span><span style="color:#54B9FF">int</span><span style="color:#4BF3C8;font-style:italic"> a1</span><span style="color:#EEF0F9">,</span><span style="color:#54B9FF"> char</span><span style="color:#54B9FF"> **</span><span style="color:#4BF3C8;font-style:italic">a2</span><span style="color:#EEF0F9">,</span><span style="color:#54B9FF"> char</span><span style="color:#54B9FF"> **</span><span style="color:#4BF3C8;font-style:italic">a3</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="3" id="cb-3-L3"><span class="ln">3</span><span style="color:#EEF0F9">{</span></span>
+<span class="line" data-line="4" id="cb-3-L4"><span class="ln">4</span><span style="color:#54B9FF">  unsigned</span><span style="color:#54B9FF"> int</span><span style="color:#EEF0F9"> v4;</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+4h] [rbp-23Ch]</span></span>
+<span class="line" data-line="5" id="cb-3-L5"><span class="ln">5</span><span style="color:#54B9FF">  int</span><span style="color:#EEF0F9"> i;</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+8h] [rbp-238h]</span></span>
+<span class="line" data-line="6" id="cb-3-L6"><span class="ln">6</span><span style="color:#54B9FF">  int</span><span style="color:#EEF0F9"> v6;</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+Ch] [rbp-234h]</span></span>
+<span class="line" data-line="7" id="cb-3-L7"><span class="ln">7</span><span style="color:#54B9FF">  char</span><span style="color:#4BF3C8"> s</span><span style="color:#EEF0F9">[</span><span style="color:#FFD493">256</span><span style="color:#EEF0F9">];</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+20h] [rbp-220h] BYREF</span></span>
+<span class="line" data-line="8" id="cb-3-L8"><span class="ln">8</span><span style="color:#54B9FF">  char</span><span style="color:#4BF3C8"> dest</span><span style="color:#EEF0F9">[</span><span style="color:#FFD493">264</span><span style="color:#EEF0F9">];</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+120h] [rbp-120h] BYREF</span></span>
+<span class="line" data-line="9" id="cb-3-L9"><span class="ln">9</span><span style="color:#54B9FF">  unsigned</span><span style="color:#EEF0F9"> __int64 v9;</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+228h] [rbp-18h]</span></span>
+<span class="line" data-line="10" id="cb-3-L10"><span class="ln">10</span></span>
+<span class="line" data-line="11" id="cb-3-L11"><span class="ln">11</span><span style="color:#EEF0F9">  v9 </span><span style="color:#54B9FF">=</span><span style="color:#00DAEF"> __readfsqword</span><span style="color:#EEF0F9">(</span><span style="color:#4BF3C8">0x</span><span style="color:#FFD493">28</span><span style="color:#4BF3C8">u</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="12" id="cb-3-L12"><span class="ln">12</span><span style="color:#EEF0F9">  v4 </span><span style="color:#54B9FF">=</span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">;</span></span>
+<span class="line" data-line="13" id="cb-3-L13"><span class="ln">13</span><span style="color:#00DAEF">  puts</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"Enter the password please :"</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="14" id="cb-3-L14"><span class="ln">14</span><span style="color:#54B9FF">  if</span><span style="color:#EEF0F9"> ( !</span><span style="color:#00DAEF">fgets</span><span style="color:#EEF0F9">(s, </span><span style="color:#FFD493">256</span><span style="color:#EEF0F9">, stdin) )</span></span>
+<span class="line" data-line="15" id="cb-3-L15"><span class="ln">15</span><span style="color:#54B9FF">    return</span><span style="color:#FFD493"> 1</span><span style="color:#EEF0F9">;</span></span>
+<span class="line" data-line="16" id="cb-3-L16"><span class="ln">16</span><span style="color:#4BF3C8">  s</span><span style="color:#EEF0F9">[</span><span style="color:#00DAEF">strcspn</span><span style="color:#EEF0F9">(s, </span><span style="color:#FFD493">"</span><span style="color:#EEF0F9">\r\n</span><span style="color:#FFD493">"</span><span style="color:#EEF0F9">)] </span><span style="color:#54B9FF">=</span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">;</span></span>
+<span class="line" data-line="17" id="cb-3-L17"><span class="ln">17</span><span style="color:#00DAEF">  strncpy</span><span style="color:#EEF0F9">(dest, s, </span><span style="color:#4BF3C8">0x</span><span style="color:#FFD493">FF</span><span style="color:#4BF3C8">u</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="18" id="cb-3-L18"><span class="ln">18</span><span style="color:#4BF3C8">  dest</span><span style="color:#EEF0F9">[</span><span style="color:#FFD493">255</span><span style="color:#EEF0F9">] </span><span style="color:#54B9FF">=</span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">;</span></span>
+<span class="line" data-line="19" id="cb-3-L19"><span class="ln">19</span><span style="color:#54B9FF">  for</span><span style="color:#EEF0F9"> ( i </span><span style="color:#54B9FF">=</span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">; i </span><span style="color:#54B9FF">&#x3C;</span><span style="color:#00DAEF"> strlen</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"Gommage"</span><span style="color:#EEF0F9">); </span><span style="color:#54B9FF">++</span><span style="color:#EEF0F9">i )</span></span>
+<span class="line" data-line="20" id="cb-3-L20"><span class="ln">20</span><span style="color:#EEF0F9">    v4 </span><span style="color:#54B9FF">=</span><span style="color:#FFD493"> 31</span><span style="color:#54B9FF"> *</span><span style="color:#EEF0F9"> v4 </span><span style="color:#54B9FF">+</span><span style="color:#4BF3C8"> aGommage</span><span style="color:#EEF0F9">[i];</span></span>
+<span class="line" data-line="21" id="cb-3-L21"><span class="ln">21</span><span style="color:#EEF0F9">  v6 </span><span style="color:#54B9FF">=</span><span style="color:#00DAEF"> strlen</span><span style="color:#EEF0F9">(dest);</span></span>
+<span class="line" data-line="22" id="cb-3-L22"><span class="ln">22</span></span>
+<span class="line highlighted" data-line="23" id="cb-3-L23"><span class="ln">23</span><span style="color:#00DAEF">  sub_1249</span><span style="color:#EEF0F9">((__int64)dest, v6, v4);</span><span style="color:#EEF0F98F;font-style:italic"> // mysterious function</span></span>
+<span class="line" data-line="24" id="cb-3-L24"><span class="ln">24</span><span style="color:#54B9FF">  if</span><span style="color:#EEF0F9"> ( !</span><span style="color:#00DAEF">strcmp</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"Ygta_u3G_t0h_0aG_r3"</span><span style="color:#EEF0F9">, dest) )</span></span>
+<span class="line" data-line="25" id="cb-3-L25"><span class="ln">25</span><span style="color:#00DAEF">    puts</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"Good Job !"</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="26" id="cb-3-L26"><span class="ln">26</span><span style="color:#54B9FF">  else</span></span>
+<span class="line" data-line="27" id="cb-3-L27"><span class="ln">27</span><span style="color:#00DAEF">    puts</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"No... Maybe another time !"</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="28" id="cb-3-L28"><span class="ln">28</span><span style="color:#54B9FF">  return</span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">;</span></span>
+<span class="line" data-line="29" id="cb-3-L29"><span class="ln">29</span><span style="color:#EEF0F9">}</span></span></code></pre></div>
+  
+</div><h1 id="analysing-main" tabindex="-1"><a class="header-anchor" href="#analysing-main">Analysing <code>main</code></a></h1>
+<p>We can see the declaration of variable <code>s</code> of type <code>char</code> of size 256 characters or 2048 bits as 1 character = 1 byte = 8 bits.<br>
+Same with <code>dest</code>.</p>
+<p><code>fgets(s, 256, stdin)</code> here <code>fgets</code> attempts to write 256 <code>char</code> to <code>s</code> from <code>stdin</code>.</p>
+<p>We can infer that <code>s</code> is user input.<br>
+More on <a href="https://en.cppreference.com/w/c/io/fgets">fgets</a>.</p>
+<p><code>s[strcspn(s, &quot;\r\n&quot;)] = 0;</code> here <code>strcspn</code> gives the index of <code>\r\n</code>[^1].</p>
+<p>Thus we have <code>s[index] = '\0';</code> where <code>\0</code>[^2] is a null terminator, we are setting the character at given index to a null terminator.</p>
+<p><code>strncpy(dest, s, 0xFFu);</code> copies up to 255 characters from <code>s</code> to <code>dest</code>, <code>0xFFu</code> is hexadecimal for 255.
+More on <a href="https://en.cppreference.com/w/c/string/byte/strncpy">strncpy</a>.</p>
+<p><code>dest[255] = 0;</code> is setting the last character in <code>dest</code> to a null terminator.</p>
+<p>Now comes the <code>for</code> loop. The loop starts from <code>i=0</code> and goes till <code>i=6</code> as length of “Gommage” is 7.</p>
+<p>The program had previously declared a variable <code>v4</code> with value 0. Inside the loop <code>v4</code> will have the value of whatever <code>31 * v4 + aGommage[i];</code> gives when the loop finishes.</p>
+<p><code>aGommage[i]</code> is quite confusing, it most probably is the ordinal value of characters in string “Gommage”.</p>
+<p>Next we have <code>v6 = strlen(dest);</code>, which basically means that <code>v6</code> is an int having value equal to the length of <code>dest</code> which is a cleaned user input.</p>
+<p>Just right below we can see a mysterious function <code>sub_1249</code> being called which is taking <code>(__int64)dest</code>, <code>v6</code>, <code>v4</code> as parameters.</p>
+<p>Let’s first calculate the value of <code>v4</code> before exploring the mysterious function.</p>
+<p>The equivalent of the <code>for</code> loop in main in python would look like:</p>
+<div class="codeblock" data-lines="6" id="cb-4">
+  <div class="cb-titlebar">
+    <span class="cb-file">keygen.py</span>
+    <span class="cb-actions">
+      <span class="cb-lang">py</span>
+      <button type="button" class="cb-copy" data-target="cb-4" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-4-L1"><span class="ln">1</span><span style="color:#EEF0F9">v4 = </span><span style="color:#FFD493">0</span></span>
+<span class="line" data-line="2" id="cb-4-L2"><span class="ln">2</span><span style="color:#EEF0F9">i = </span><span style="color:#FFD493">0</span></span>
+<span class="line" data-line="3" id="cb-4-L3"><span class="ln">3</span><span style="color:#EEF0F9">ag = </span><span style="color:#FFD493">"Gommage"</span></span>
+<span class="line" data-line="4" id="cb-4-L4"><span class="ln">4</span></span>
+<span class="line" data-line="5" id="cb-4-L5"><span class="ln">5</span><span style="color:#54B9FF;font-style:italic">for</span><span style="color:#EEF0F9"> i </span><span style="color:#54B9FF;font-style:italic">in</span><span style="color:#EEF0F9"> range(len(ag)):</span></span>
+<span class="line" data-line="6" id="cb-4-L6"><span class="ln">6</span><span style="color:#EEF0F9">    v4 = </span><span style="color:#FFD493">31</span><span style="color:#EEF0F9"> * v4 + ord(ag[i])</span></span></code></pre></div>
+  
+</div><p>The above code gives the final value of <code>v4</code> to be <code>66294604631</code>.</p>
+<p>We don’t know what this value is being used for yet, for that we need to analyse the mysterious function.</p>
+<h1 id="analysing-sub_1249" tabindex="-1"><a class="header-anchor" href="#analysing-sub_1249">Analysing <code>sub_1249</code></a></h1>
+<p>The <code>sub_1249</code> function is right above our <code>main</code> funtion in the decompiler. Lets take a look.</p>
+<div class="codeblock" data-lines="19" id="cb-5">
+  <div class="cb-titlebar">
+    <span class="cb-file">sub_1249 Pseudocode</span>
+    <span class="cb-actions">
+      <span class="cb-lang">c</span>
+      <button type="button" class="cb-copy" data-target="cb-5" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-5-L1"><span class="ln">1</span><span style="color:#EEF0F98F;font-style:italic">//----- (0000000000001249) ----------------------------------------------------</span></span>
+<span class="line" data-line="2" id="cb-5-L2"><span class="ln">2</span><span style="color:#54B9FF">void</span><span style="color:#EEF0F9"> __fastcall </span><span style="color:#00DAEF">sub_1249</span><span style="color:#EEF0F9">(</span><span style="color:#4BF3C8">__int64 </span><span style="color:#4BF3C8;font-style:italic">a1</span><span style="color:#EEF0F9">,</span><span style="color:#54B9FF"> int</span><span style="color:#4BF3C8;font-style:italic"> a2</span><span style="color:#EEF0F9">,</span><span style="color:#54B9FF"> unsigned</span><span style="color:#54B9FF"> int</span><span style="color:#4BF3C8;font-style:italic"> a3</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="3" id="cb-5-L3"><span class="ln">3</span><span style="color:#EEF0F9">{</span></span>
+<span class="line" data-line="4" id="cb-5-L4"><span class="ln">4</span><span style="color:#54B9FF">  int</span><span style="color:#EEF0F9"> v3;</span><span style="color:#EEF0F98F;font-style:italic"> // eax</span></span>
+<span class="line" data-line="5" id="cb-5-L5"><span class="ln">5</span><span style="color:#54B9FF">  char</span><span style="color:#EEF0F9"> v4;</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+17h] [rbp-9h]</span></span>
+<span class="line" data-line="6" id="cb-5-L6"><span class="ln">6</span><span style="color:#54B9FF">  int</span><span style="color:#EEF0F9"> i;</span><span style="color:#EEF0F98F;font-style:italic"> // [rsp+18h] [rbp-8h]</span></span>
+<span class="line" data-line="7" id="cb-5-L7"><span class="ln">7</span></span>
+<span class="line" data-line="8" id="cb-5-L8"><span class="ln">8</span><span style="color:#54B9FF">  if</span><span style="color:#EEF0F9"> ( a1 &#x26;&#x26; a2 </span><span style="color:#54B9FF">></span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9"> )</span></span>
+<span class="line" data-line="9" id="cb-5-L9"><span class="ln">9</span><span style="color:#EEF0F9">  {</span></span>
+<span class="line" data-line="10" id="cb-5-L10"><span class="ln">10</span><span style="color:#00DAEF">    srand</span><span style="color:#EEF0F9">(a3);</span></span>
+<span class="line" data-line="11" id="cb-5-L11"><span class="ln">11</span><span style="color:#54B9FF">    for</span><span style="color:#EEF0F9"> ( i </span><span style="color:#54B9FF">=</span><span style="color:#EEF0F9"> a2 </span><span style="color:#54B9FF">-</span><span style="color:#FFD493"> 1</span><span style="color:#EEF0F9">; i </span><span style="color:#54B9FF">></span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">; </span><span style="color:#54B9FF">--</span><span style="color:#EEF0F9">i )</span></span>
+<span class="line" data-line="12" id="cb-5-L12"><span class="ln">12</span><span style="color:#EEF0F9">    {</span></span>
+<span class="line" data-line="13" id="cb-5-L13"><span class="ln">13</span><span style="color:#EEF0F9">      v3 </span><span style="color:#54B9FF">=</span><span style="color:#00DAEF"> rand</span><span style="color:#EEF0F9">();</span></span>
+<span class="line" data-line="14" id="cb-5-L14"><span class="ln">14</span><span style="color:#EEF0F9">      v4 </span><span style="color:#54B9FF">=</span><span style="color:#54B9FF"> *</span><span style="color:#EEF0F9">(_BYTE </span><span style="color:#54B9FF">*</span><span style="color:#EEF0F9">)(i </span><span style="color:#54B9FF">+</span><span style="color:#EEF0F9"> a1);</span></span>
+<span class="line" data-line="15" id="cb-5-L15"><span class="ln">15</span><span style="color:#54B9FF">      *</span><span style="color:#EEF0F9">(_BYTE </span><span style="color:#54B9FF">*</span><span style="color:#EEF0F9">)(i </span><span style="color:#54B9FF">+</span><span style="color:#EEF0F9"> a1) </span><span style="color:#54B9FF">=</span><span style="color:#54B9FF"> *</span><span style="color:#EEF0F9">(_BYTE </span><span style="color:#54B9FF">*</span><span style="color:#EEF0F9">)(v3 </span><span style="color:#54B9FF">%</span><span style="color:#EEF0F9"> (i </span><span style="color:#54B9FF">+</span><span style="color:#FFD493"> 1</span><span style="color:#EEF0F9">) </span><span style="color:#54B9FF">+</span><span style="color:#EEF0F9"> a1);</span></span>
+<span class="line" data-line="16" id="cb-5-L16"><span class="ln">16</span><span style="color:#54B9FF">      *</span><span style="color:#EEF0F9">(_BYTE </span><span style="color:#54B9FF">*</span><span style="color:#EEF0F9">)(a1 </span><span style="color:#54B9FF">+</span><span style="color:#EEF0F9"> v3 </span><span style="color:#54B9FF">%</span><span style="color:#EEF0F9"> (i </span><span style="color:#54B9FF">+</span><span style="color:#FFD493"> 1</span><span style="color:#EEF0F9">)) </span><span style="color:#54B9FF">=</span><span style="color:#EEF0F9"> v4;</span></span>
+<span class="line" data-line="17" id="cb-5-L17"><span class="ln">17</span><span style="color:#EEF0F9">    }</span></span>
+<span class="line" data-line="18" id="cb-5-L18"><span class="ln">18</span><span style="color:#EEF0F9">  }</span></span>
+<span class="line" data-line="19" id="cb-5-L19"><span class="ln">19</span><span style="color:#EEF0F9">}</span></span></code></pre></div>
+  
+</div><p>As we previously saw in <code>main</code>, the <code>sub_1249</code> function takes 3 parameters, <code>(__int64)dest</code>, <code>v6</code> and <code>v4</code>.</p>
+<p>From this we can infer that <code>a1</code> is <code>(__int64)dest</code>, <code>a2</code> is <code>v6</code> and <code>a3</code> is <code>v4</code>.</p>
+<p><code>(__int64)dest</code> is a 64-bit pointer to a buffer. <code>dest</code> now <code>a1</code> is being used as a pointer.</p>
+<p><code>srand(a3)</code> is interesting. From this we finally know what the value of <code>v4</code> now <code>a3</code> is a seed for <code>rand()</code>.<br>
+More on <a href="https://en.cppreference.com/w/cpp/numeric/random/srand.html">srand</a></p>
+<p>The <code>for</code> loop is starting from the length of user input <code>a1</code>, and decrements till <code>i=1</code>.</p>
+<p>In the loop we first generate a random integer and assign its value to <code>v3</code>.</p>
+<p>Now in <code>sub_1249</code>, <code>v4</code> is above declared as of type <code>char</code> and it takes the value of <code>*(_BYTE *)(i + a1);</code> which basically means <code>v4 = a1[i]</code>.</p>
+<p>As <code>a1</code> is user input, <code>v4 = *(_BYTE *)(i + a1);</code>[^3] is equivalent to <code>v4 = a1[i]</code>.</p>
+<p>The next line basically is <code>a1[i] = a1[v3 % (i+1)]</code>, here <code>v3</code> is a random number given by <code>rand()</code>.</p>
+<p>The value of <code>v3 % (i+1)</code> is in range of <code>0 &lt;= v3 % (i+1) &lt;= i</code>.</p>
+<p>Next line basically is <code>a1[v3 % (i+1)]</code> which is equal to <code>v4</code>.</p>
+<p>This means that <code>a1[v3 % (i+1)] = v4</code>, which tells us that <code>v4</code> is just a temp placeholder to save value of <code>a1[i]</code> at the start.</p>
+<p>As we know, <code>a1</code> is being used as a pointer to a buffer, by the end of the <code>sub_1249</code> function, whatever value that buffer previously held would be mutated.</p>
+<p>As in the above examples input is <code>dest</code> or <code>a1</code>, therefore the function <code>sub_1249</code> mutates the value of user input.</p>
+<h1 id="back-to-main" tabindex="-1"><a class="header-anchor" href="#back-to-main">Back to <code>main</code></a></h1>
+<p>The final piece of the puzzle is:</p>
+<div class="codeblock" data-lines="5" id="cb-6">
+  <div class="cb-titlebar">
+    <span class="cb-file">Main Pseudocode</span>
+    <span class="cb-actions">
+      <span class="cb-lang">c</span>
+      <button type="button" class="cb-copy" data-target="cb-6" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-6-L1"><span class="ln">1</span><span style="color:#54B9FF">if</span><span style="color:#EEF0F9"> ( !</span><span style="color:#00DAEF">strcmp</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"Ygta_u3G_t0h_0aG_r3"</span><span style="color:#EEF0F9">,</span><span style="color:#4BF3C8"> dest</span><span style="color:#EEF0F9">) )</span></span>
+<span class="line" data-line="2" id="cb-6-L2"><span class="ln">2</span><span style="color:#00DAEF">    puts</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"Good Job !"</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="3" id="cb-6-L3"><span class="ln">3</span><span style="color:#54B9FF">else</span></span>
+<span class="line" data-line="4" id="cb-6-L4"><span class="ln">4</span><span style="color:#00DAEF">    puts</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"No... Maybe another time !"</span><span style="color:#EEF0F9">);</span></span>
+<span class="line" data-line="5" id="cb-6-L5"><span class="ln">5</span><span style="color:#54B9FF">return</span><span style="color:#FFD493"> 0</span><span style="color:#EEF0F9">;</span></span></code></pre></div>
+  
+</div><p>The function <code>strcmp</code> compares <code>Ygta_u3G_t0h_0aG_r3</code> with now mutated <code>dest</code></p>
+<p>So the password is such a string which when mutated by the funtion <code>sub_1249</code> turns into <code>Ygta_u3G_t0h_0aG_r3</code></p>
+<h1 id="writing-keygen" tabindex="-1"><a class="header-anchor" href="#writing-keygen">Writing Keygen</a></h1>
+<p>Its time to write the keygen, we have to reverse the mutation done by <code>sub_1249</code>.</p>
+<p>We already have the script to generate the seed, but the issue is that the <code>rand</code> function is in C and will give different randomness compared to python.</p>
+<p>We need to look for a C equivalent in python[^4]. Which is the <code>ctypes</code> module.</p>
+<p>Lets try to emulate the <code>sub_1249</code> function in python.</p>
+<div class="codeblock" data-lines="25" id="cb-7">
+  <div class="cb-titlebar">
+    <span class="cb-file">mutator.py</span>
+    <span class="cb-actions">
+      <span class="cb-lang">py</span>
+      <button type="button" class="cb-copy" data-target="cb-7" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-7-L1"><span class="ln">1</span><span style="color:#54B9FF;font-style:italic">from</span><span style="color:#EEF0F9"> ctypes </span><span style="color:#54B9FF;font-style:italic">import</span><span style="color:#FFD493"> CDLL</span></span>
+<span class="line" data-line="2" id="cb-7-L2"><span class="ln">2</span><span style="color:#EEF0F9">libc = </span><span style="color:#00DAEF">CDLL</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"libc.so.6"</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="3" id="cb-7-L3"><span class="ln">3</span></span>
+<span class="line" data-line="4" id="cb-7-L4"><span class="ln">4</span><span style="color:#EEF0F9">user_input = input(</span><span style="color:#FFD493">"Enter the input: "</span><span style="color:#EEF0F9">).</span><span style="color:#00DAEF">strip</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"</span><span style="color:#EEF0F9">\r\n</span><span style="color:#FFD493">"</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="5" id="cb-7-L5"><span class="ln">5</span><span style="color:#EEF0F9">len_user_input = len(user_input)</span></span>
+<span class="line" data-line="6" id="cb-7-L6"><span class="ln">6</span></span>
+<span class="line" data-line="7" id="cb-7-L7"><span class="ln">7</span><span style="color:#EEF0F9">seed = </span><span style="color:#FFD493">0</span></span>
+<span class="line" data-line="8" id="cb-7-L8"><span class="ln">8</span><span style="color:#EEF0F9">i = </span><span style="color:#FFD493">0</span></span>
+<span class="line" data-line="9" id="cb-7-L9"><span class="ln">9</span><span style="color:#EEF0F9">ag = </span><span style="color:#FFD493">"Gommage"</span></span>
+<span class="line" data-line="10" id="cb-7-L10"><span class="ln">10</span></span>
+<span class="line" data-line="11" id="cb-7-L11"><span class="ln">11</span><span style="color:#54B9FF;font-style:italic">for</span><span style="color:#EEF0F9"> i </span><span style="color:#54B9FF;font-style:italic">in</span><span style="color:#EEF0F9"> range(len(ag)):</span></span>
+<span class="line" data-line="12" id="cb-7-L12"><span class="ln">12</span><span style="color:#EEF0F9">    seed = </span><span style="color:#FFD493">31</span><span style="color:#EEF0F9"> * seed + ord(ag[i])</span></span>
+<span class="line" data-line="13" id="cb-7-L13"><span class="ln">13</span></span>
+<span class="line" data-line="14" id="cb-7-L14"><span class="ln">14</span><span style="color:#EEF0F9">libc.</span><span style="color:#00DAEF">srand</span><span style="color:#EEF0F9">(seed)</span></span>
+<span class="line" data-line="15" id="cb-7-L15"><span class="ln">15</span><span style="color:#EEF0F9">user_input = (list(user_input))</span></span>
+<span class="line" data-line="16" id="cb-7-L16"><span class="ln">16</span></span>
+<span class="line" data-line="17" id="cb-7-L17"><span class="ln">17</span><span style="color:#54B9FF;font-style:italic">for</span><span style="color:#EEF0F9"> i </span><span style="color:#54B9FF;font-style:italic">in</span><span style="color:#EEF0F9"> range(len_user_input-</span><span style="color:#FFD493">1</span><span style="color:#EEF0F9">, </span><span style="color:#FFD493">0</span><span style="color:#EEF0F9">, -</span><span style="color:#FFD493">1</span><span style="color:#EEF0F9">):</span></span>
+<span class="line" data-line="18" id="cb-7-L18"><span class="ln">18</span><span style="color:#EEF0F9">    rand = libc.</span><span style="color:#00DAEF">rand</span><span style="color:#EEF0F9">()</span></span>
+<span class="line" data-line="19" id="cb-7-L19"><span class="ln">19</span><span style="color:#EEF0F9">    temp = user_input[i]</span></span>
+<span class="line" data-line="20" id="cb-7-L20"><span class="ln">20</span><span style="color:#EEF0F9">    x = rand % (i+</span><span style="color:#FFD493">1</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="21" id="cb-7-L21"><span class="ln">21</span><span style="color:#EEF0F9">    user_input[i] = user_input[x]</span></span>
+<span class="line" data-line="22" id="cb-7-L22"><span class="ln">22</span><span style="color:#EEF0F9">    user_input[x] = temp</span></span>
+<span class="line" data-line="23" id="cb-7-L23"><span class="ln">23</span></span>
+<span class="line" data-line="24" id="cb-7-L24"><span class="ln">24</span><span style="color:#EEF0F9">output = </span><span style="color:#FFD493">''</span><span style="color:#EEF0F9">.</span><span style="color:#00DAEF">join</span><span style="color:#EEF0F9">(user_input)</span></span>
+<span class="line" data-line="25" id="cb-7-L25"><span class="ln">25</span><span style="color:#EEF0F9">print(output)</span></span></code></pre></div>
+  
+</div><p>Running the mutator with input <code>rentri</code> gives:</p>
+<div class="codeblock" data-lines="3" id="cb-8">
+  <div class="cb-titlebar">
+    <span class="cb-file">&nbsp;</span>
+    <span class="cb-actions">
+      <span class="cb-lang">bash</span>
+      <button type="button" class="cb-copy" data-target="cb-8" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-8-L1"><span class="ln">1</span><span style="color:#00DAEF">❯</span><span style="color:#FFD493"> python3</span><span style="color:#FFD493"> mutator.py</span></span>
+<span class="line" data-line="2" id="cb-8-L2"><span class="ln">2</span><span style="color:#00DAEF">Enter</span><span style="color:#FFD493"> the</span><span style="color:#FFD493"> input:</span><span style="color:#FFD493"> rentri</span></span>
+<span class="line" data-line="3" id="cb-8-L3"><span class="ln">3</span><span style="color:#00DAEF">rretin</span></span></code></pre></div>
+  
+</div><p>So our keygen needs to be such that when we give input <code>rretin</code> we get output <code>rentri</code>.</p>
+<p>One way to do that is to record each character swap in a set, this swap when done mutates the string so to unmutate the string we just need to peform the swap in reverse.</p>
+<div class="codeblock" data-lines="30" id="cb-9">
+  <div class="cb-titlebar">
+    <span class="cb-file">keygen.py</span>
+    <span class="cb-actions">
+      <span class="cb-lang">py</span>
+      <button type="button" class="cb-copy" data-target="cb-9" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-9-L1"><span class="ln">1</span><span style="color:#54B9FF;font-style:italic">from</span><span style="color:#EEF0F9"> ctypes </span><span style="color:#54B9FF;font-style:italic">import</span><span style="color:#FFD493"> CDLL</span></span>
+<span class="line" data-line="2" id="cb-9-L2"><span class="ln">2</span><span style="color:#EEF0F9">libc = </span><span style="color:#00DAEF">CDLL</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"libc.so.6"</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="3" id="cb-9-L3"><span class="ln">3</span></span>
+<span class="line" data-line="4" id="cb-9-L4"><span class="ln">4</span><span style="color:#EEF0F9">user_input = input(</span><span style="color:#FFD493">"Enter the input: "</span><span style="color:#EEF0F9">).</span><span style="color:#00DAEF">strip</span><span style="color:#EEF0F9">(</span><span style="color:#FFD493">"</span><span style="color:#EEF0F9">\r\n</span><span style="color:#FFD493">"</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="5" id="cb-9-L5"><span class="ln">5</span><span style="color:#EEF0F9">len_user_input = len(user_input)</span></span>
+<span class="line" data-line="6" id="cb-9-L6"><span class="ln">6</span></span>
+<span class="line" data-line="7" id="cb-9-L7"><span class="ln">7</span><span style="color:#EEF0F9">seed = </span><span style="color:#FFD493">0</span></span>
+<span class="line" data-line="8" id="cb-9-L8"><span class="ln">8</span><span style="color:#EEF0F9">i = </span><span style="color:#FFD493">0</span></span>
+<span class="line" data-line="9" id="cb-9-L9"><span class="ln">9</span><span style="color:#EEF0F9">ag = </span><span style="color:#FFD493">"Gommage"</span></span>
+<span class="line" data-line="10" id="cb-9-L10"><span class="ln">10</span></span>
+<span class="line" data-line="11" id="cb-9-L11"><span class="ln">11</span><span style="color:#54B9FF;font-style:italic">for</span><span style="color:#EEF0F9"> i </span><span style="color:#54B9FF;font-style:italic">in</span><span style="color:#EEF0F9"> range(len(ag)):</span></span>
+<span class="line" data-line="12" id="cb-9-L12"><span class="ln">12</span><span style="color:#EEF0F9">    seed = </span><span style="color:#FFD493">31</span><span style="color:#EEF0F9"> * seed + ord(ag[i])</span></span>
+<span class="line" data-line="13" id="cb-9-L13"><span class="ln">13</span></span>
+<span class="line" data-line="14" id="cb-9-L14"><span class="ln">14</span><span style="color:#EEF0F9">libc.</span><span style="color:#00DAEF">srand</span><span style="color:#EEF0F9">(seed)</span></span>
+<span class="line" data-line="15" id="cb-9-L15"><span class="ln">15</span><span style="color:#EEF0F9">user_input = (list(user_input))</span></span>
+<span class="line" data-line="16" id="cb-9-L16"><span class="ln">16</span></span>
+<span class="line" data-line="17" id="cb-9-L17"><span class="ln">17</span><span style="color:#EEF0F9">set_of_swaps = []</span></span>
+<span class="line" data-line="18" id="cb-9-L18"><span class="ln">18</span></span>
+<span class="line" data-line="19" id="cb-9-L19"><span class="ln">19</span><span style="color:#54B9FF;font-style:italic">for</span><span style="color:#EEF0F9"> i </span><span style="color:#54B9FF;font-style:italic">in</span><span style="color:#EEF0F9"> range(len_user_input-</span><span style="color:#FFD493">1</span><span style="color:#EEF0F9">, </span><span style="color:#FFD493">0</span><span style="color:#EEF0F9">, -</span><span style="color:#FFD493">1</span><span style="color:#EEF0F9">):</span></span>
+<span class="line" data-line="20" id="cb-9-L20"><span class="ln">20</span><span style="color:#EEF0F9">    rand = libc.</span><span style="color:#00DAEF">rand</span><span style="color:#EEF0F9">()</span></span>
+<span class="line" data-line="21" id="cb-9-L21"><span class="ln">21</span><span style="color:#EEF0F9">    x = rand % (i+</span><span style="color:#FFD493">1</span><span style="color:#EEF0F9">)</span></span>
+<span class="line" data-line="22" id="cb-9-L22"><span class="ln">22</span><span style="color:#EEF0F9">    set_of_swaps.</span><span style="color:#00DAEF">append</span><span style="color:#EEF0F9">((i, x))</span></span>
+<span class="line" data-line="23" id="cb-9-L23"><span class="ln">23</span></span>
+<span class="line" data-line="24" id="cb-9-L24"><span class="ln">24</span><span style="color:#54B9FF;font-style:italic">for</span><span style="color:#EEF0F9"> i, x </span><span style="color:#54B9FF;font-style:italic">in</span><span style="color:#EEF0F9"> reversed(set_of_swaps):</span></span>
+<span class="line" data-line="25" id="cb-9-L25"><span class="ln">25</span><span style="color:#EEF0F9">    temp = user_input[i]</span></span>
+<span class="line" data-line="26" id="cb-9-L26"><span class="ln">26</span><span style="color:#EEF0F9">    user_input[i] = user_input[x]</span></span>
+<span class="line" data-line="27" id="cb-9-L27"><span class="ln">27</span><span style="color:#EEF0F9">    user_input[x] = temp</span></span>
+<span class="line" data-line="28" id="cb-9-L28"><span class="ln">28</span></span>
+<span class="line" data-line="29" id="cb-9-L29"><span class="ln">29</span><span style="color:#EEF0F9">output = </span><span style="color:#FFD493">''</span><span style="color:#EEF0F9">.</span><span style="color:#00DAEF">join</span><span style="color:#EEF0F9">(user_input)</span></span>
+<span class="line" data-line="30" id="cb-9-L30"><span class="ln">30</span><span style="color:#EEF0F9">print(output)</span></span></code></pre></div>
+  
+</div><p>When we give the keygen the input <code>rretin</code> we expect an output of <code>rentri</code></p>
+<div class="codeblock" data-lines="3" id="cb-10">
+  <div class="cb-titlebar">
+    <span class="cb-file">&nbsp;</span>
+    <span class="cb-actions">
+      <span class="cb-lang">bash</span>
+      <button type="button" class="cb-copy" data-target="cb-10" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-10-L1"><span class="ln">1</span><span style="color:#00DAEF">❯</span><span style="color:#FFD493"> python3</span><span style="color:#FFD493"> keygen.py</span></span>
+<span class="line" data-line="2" id="cb-10-L2"><span class="ln">2</span><span style="color:#00DAEF">Enter</span><span style="color:#FFD493"> the</span><span style="color:#FFD493"> input:</span><span style="color:#FFD493"> rretin</span></span>
+<span class="line" data-line="3" id="cb-10-L3"><span class="ln">3</span><span style="color:#00DAEF">rentri</span></span></code></pre></div>
+  
+</div><p>We do indeed get the expected output <code>rentri</code>.</p>
+<h1 id="final-solution" tabindex="-1"><a class="header-anchor" href="#final-solution">Final Solution</a></h1>
+<p>With this our keygen is done. Now all that’s left is to test it on <code>Ygta_u3G_t0h_0aG_r3</code></p>
+<div class="codeblock" data-lines="3" id="cb-11">
+  <div class="cb-titlebar">
+    <span class="cb-file">&nbsp;</span>
+    <span class="cb-actions">
+      <span class="cb-lang">bash</span>
+      <button type="button" class="cb-copy" data-target="cb-11" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-11-L1"><span class="ln">1</span><span style="color:#00DAEF">❯</span><span style="color:#FFD493"> python3</span><span style="color:#FFD493"> keygen.py</span></span>
+<span class="line" data-line="2" id="cb-11-L2"><span class="ln">2</span><span style="color:#00DAEF">Enter</span><span style="color:#FFD493"> the</span><span style="color:#FFD493"> input:</span><span style="color:#FFD493"> Ygta_u3G_t0h_0aG_r3</span></span>
+<span class="line" data-line="3" id="cb-11-L3"><span class="ln">3</span><span style="color:#00DAEF">GG_Y0u_ar3_th3_g0at</span></span></code></pre></div>
+  
+</div><p>Lets test the string <code>GG_Y0u_ar3_th3_g0at</code>.</p>
+<div class="codeblock" data-lines="4" id="cb-12">
+  <div class="cb-titlebar">
+    <span class="cb-file">&nbsp;</span>
+    <span class="cb-actions">
+      <span class="cb-lang">bash</span>
+      <button type="button" class="cb-copy" data-target="cb-12" aria-label="copy code">copy</button>
+    </span>
+  </div>
+  <div class="cb-body"><pre class="shiki houston cb-pre" style="background-color:#17191e;color:#eef0f9" tabindex="0"><code><span class="line" data-line="1" id="cb-12-L1"><span class="ln">1</span><span style="color:#00DAEF">❯</span><span style="color:#FFD493"> ./crackme</span></span>
+<span class="line" data-line="2" id="cb-12-L2"><span class="ln">2</span><span style="color:#00DAEF">Enter</span><span style="color:#FFD493"> the</span><span style="color:#FFD493"> password</span><span style="color:#FFD493"> please</span><span style="color:#FFD493"> :</span></span>
+<span class="line" data-line="3" id="cb-12-L3"><span class="ln">3</span><span style="color:#00DAEF">GG_Y0u_ar3_th3_g0at</span></span>
+<span class="line" data-line="4" id="cb-12-L4"><span class="ln">4</span><span style="color:#00DAEF">Good</span><span style="color:#FFD493"> Job</span><span style="color:#FFD493"> !</span></span></code></pre></div>
+  
+</div><p>And its done! The password is <code>GG_Y0u_ar3_th3_g0at</code>.</p>
+
+</div>
+
+<h2>SEE ALSO</h2>
+<div class="indent">
+  <p><a href="/writing/">all writing</a>, <a href="/til/">til</a>, <a href="/projects/">projects</a></p>
+</div>
+
+
+  <div class="pagefooter">
+    <span>2026-08-16</span>
+    <span>Made with <a href="https://www.11ty.dev/">11ty/eleventy</a></span>
+    <span>rentri(9)</span>
+  </div>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>

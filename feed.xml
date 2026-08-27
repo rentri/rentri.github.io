@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>rentri</title>
+  <subtitle>A computerist who spends most of his time in cyberspace, reverse engineering binaries, writing systems software, and reading novels.</subtitle>
+  <link href="https://rentri.github.io/feed.xml" rel="self"/>
+  <link href="https://rentri.github.io/"/>
+  <updated>2025-10-08T00:00:00Z</updated>
+  <id>https://rentri.github.io/</id>
+  
+  <entry>
+    <title>Crackme: 45exile&#39;s Shuffle</title>
+    <link href="https://rentri.github.io/writing/crackme-45exile-shuffle/"/>
+    <id>https://rentri.github.io/writing/crackme-45exile-shuffle/</id>
+    <updated>2025-10-08T00:00:00Z</updated>
+    <summary>Solving my first ever crackme Shuffle by 45exile</summary>
+  </entry>
+  
+</feed>

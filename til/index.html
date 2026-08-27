@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>til</title>
+<meta name="description" content="Today I Learned — small, dated notes, newest first.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="pageheader">
+    <a href="/">rentri(9)</a>
+    <marquee>
+      No matter where you go, everyone's connected.
+    </marquee>
+  <span style="white-space:nowrap;">User Manual</span>  </div>
+
+  
+<h2>TIL</h2>
+
+<div class="til-jump">
+  filter:
+  <input type="text" id="til-jump-input" placeholder="search title or slug…" autocomplete="off">
+</div>
+
+<div class="til-list">
+  
+  <div class="til-entry" id="ebpf-intro" data-search="What is eBPF? til ebpf-intro">
+    <div class="til-head">
+      <span class="til-title">What is eBPF?</span>
+      <span class="til-date">2026-08-27</span>
+    </div>
+    <div class="til-body">
+      <p>eBPF or extended Berkeley Packet Filter allows developers to dynamically load custom, sandboxed programs into the Linux kernel, where they can safely execute at specific kernel hooks (execution attachemnet point provided by the kernal) without modifying or recompiling the kernel.
+These programs will be called like a function. Programs can have lots of different purposes, they can for example record information, modify information, make decisions and cause side effects.</p>
+<p>We write and compile eBPF programs in userspace, but the resulting eBPF bytecode is loaded into and executed by the kernel. Before allowing a program to run, the kernel’s eBPF verifier analyzes the bytecode to ensure that it satisfies the kernel’s safety constraints.</p>
+<p>eBPF is commonly used for observability, tracing, networking, security, and performance monitoring.</p>
+<p>For example, Netflix’s Flow Exporter uses eBPF tracepoints to capture TCP flows in near real time on instances running its microservices</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+  <div class="til-entry" id="x86" data-search="Why does x86 mean 32-bit? til x86">
+    <div class="til-head">
+      <span class="til-title">Why does x86 mean 32-bit?</span>
+      <span class="til-date">2026-05-29</span>
+    </div>
+    <div class="til-body">
+      <p>Well it finally happened… I accidently dowloaded an x86 binary thinking it was 64-bit.</p>
+<p>Why on God’s green earth is x86 32-bit?</p>
+<p>x64 is well rightfully named 64-bit, then what the hell is amd64?
+I have a 64-bit Intel machine so should I download the x64 version or amd64?
+If amd64 exists then what about intel64?
+And if x86 is 32-bit then why does x32 exist?</p>
+<p>Well now I know!</p>
+<p>x86 basically refers to the family of Intel processor architecture that was used in PC’s such as the 8086, 8088, 286 etc,.
+So the entire architecture family became know as x86, when 32-bit became dominant x86 became synonymous with 32-bit.</p>
+<p>x64 is the architecture name for the extension of the x86 instruction set to 64-bit. It was invented by AMD.
+At the same time Intel was working on their 64-bit architecture called Itanium which flopped badly, so they copied AMD’s x64, and called their version Intel 64.
+AMD called the x64 architecture x86_64 or amd64 and these name were commonly used in open source tools. The name Intel 64 or EM64T never caught on.</p>
+<p>So whenver you have to download any binary for your modern 64-bit computer, if you see a binary for amd64 it <strong>will</strong> run on your intel machine.
+It is the same architecture but has multiple names for it , amd64 (mosly used by the open source and linux community), x86_64 the original official name by AMD, x64 (used in Windows) and Intel 64 which is a dead name used nowhere except inside Intel manuals.</p>
+<p>x32 is not associated with hardware, it is an ILP32 variant of the x86-64 System V ABI: 32-bit pointers in 64-bit mode according to <a href="https://en.wikipedia.org/wiki/X32_ABI">the x32 ABI spec</a>. You should not see any binaries or packages named for x32, as it is <strong>NOT</strong> an instruction set.</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+  <div class="til-entry" id="audio-sampling" data-search="Why is most audio sampled at 44.1KHz? til audio-sampling">
+    <div class="til-head">
+      <span class="til-title">Why is most audio sampled at 44.1KHz?</span>
+      <span class="til-date">2026-04-01</span>
+    </div>
+    <div class="til-body">
+      <p>It is know that human hearing tops at 20Khz. The <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Nyquist sampling theorem</a> states
+that a digital system can perfectly reproduce any frequency up to half its sample rate.</p>
+<p>Therefore to capture every frequency a human can hear we need  Nyquist frequency of 40Khz.</p>
+<p>Then why 44.1KHz?</p>
+<p>In the early days of digital audio, storing the equivalent of a CD album worth of digital data
+on a hard drive was not possible because the drives of the time simply did not have sufficient capacity.
+Therefore the video recorders were repurposed to store audio samples as black and white video signals.
+These video recorders ran at 30 frames per second and had 490 useable lines per frame.
+It was decided that 3 audio samples should be stored per line of video.</p>
+<p><code>3 samples/line * 490 lines/frame * 30 frames/sec = 44100 samples/sec</code></p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+  <div class="til-entry" id="keyboard-polling" data-search="Polling is discrete til keyboard-polling">
+    <div class="til-head">
+      <span class="til-title">Polling is discrete</span>
+      <span class="til-date">2026-03-31</span>
+    </div>
+    <div class="til-body">
+      <p>Polling is an I/O technique in which the CPU repeatedly checks the status of a peripheral device.
+In the case of keyboard polling, the computer polls the keyboard at fixed intervals, and the keyboard responds with which keys are pressed.
+For a slower polling frequency, if a key is pressed between two polls, the computer will miss that key.
+The higher the polling frequency, the fewer key misses.</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+  <div class="til-entry" id="katsurba" data-search="Computers multiply big numbers fast by reducing multiplication til katsurba">
+    <div class="til-head">
+      <span class="til-title">Computers multiply big numbers fast by reducing multiplication</span>
+      <span class="til-date">2026-01-16</span>
+    </div>
+    <div class="til-body">
+      <p>The <a href="https://en.wikipedia.org/wiki/Karatsuba_algorithm">Karatsuba</a> algorithm reduces the number of multiplications needed for two n-digit numbers that
+require <code>k</code> multiplication steps by substituting them with <code>k-1</code> multiplications plus an addition instead
+of <code>k</code> multiplications, as multiplication is asymptotically more expensive than addition.</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+  <div class="til-entry" id="bss" data-search=".bss section stores unintialized varibales til bss">
+    <div class="til-head">
+      <span class="til-title">.bss section stores unintialized varibales</span>
+      <span class="til-date">2026-01-15</span>
+    </div>
+    <div class="til-body">
+      <p>The .data section in ELF binaries is used for holding initialized global or static variables.
+The local variables are stored in the stack. All the uninitialized global or static variables are stored in the .bss section and
+occupy no space in the binary, as they are zeroed at runtime.</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+  <div class="til-entry" id="base64" data-search="Base64 encoding til base64">
+    <div class="til-head">
+      <span class="til-title">Base64 encoding</span>
+      <span class="til-date">2025-10-30</span>
+    </div>
+    <div class="til-body">
+      <p>Base64 encoding allows us to encode any bytes to “safe” bytes, bytes which are known to be safe to send
+without getting corrupted.</p>
+<p>Example of “unsafe” bytes would be control characters.</p>
+<p>To send text with Base64 encoding we first encode the text to say UTF-8, after that we group the binary into chunks of 3 bytes,
+we further divide the chunks into four 6-bit groups. Now each 6-bit group can represent values between <code>0</code> and <code>63</code>,
+these values are then mapped to the corresponding Base64 character.</p>
+<p>What if the chunks are not of 3 bytes?</p>
+<p>For 1 extra byte we have space left for 2 bytes, we pad the econding with <code>==</code></p>
+<p>For 2 extra byte we have space left for 1 byte, we pad the encoding with <code>=</code></p>
+<p>The reciever will have to reverse the process to recover the original text.</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
+</div>
+
+
+  <div class="pagefooter">
+    <span>2026-08-16</span>
+    <span>Made with <a href="https://www.11ty.dev/">11ty/eleventy</a></span>
+    <span>rentri(9)</span>
+  </div>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>
