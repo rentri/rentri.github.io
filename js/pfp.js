@@ -453,6 +453,7 @@ function statusFor(container, message) {
 
 const pfpInstances = new Map();
 
+
 function mountPfp(container, options = {}) {
   if (pfpInstances.has(container)) return;
 
@@ -463,7 +464,8 @@ function mountPfp(container, options = {}) {
     return;
   }
 
-  const originalVisibility = img.style.visibility;
+  // Never show the source image, even while loading.
+  img.style.visibility = "hidden";
 
   if (getComputedStyle(container).position === "static") {
     container.style.position = "relative";
@@ -487,32 +489,59 @@ function mountPfp(container, options = {}) {
   container.appendChild(canvas);
 
   let started = false;
+  let failed = false;
+
+  function fail(error) {
+    if (failed || started) return;
+    failed = true;
+
+    // Keep both the image and broken-image indicator hidden.
+    canvas.remove();
+
+    if (error) {
+      console.error("ASCII portrait initialization failed:", error);
+    }
+
+    statusFor(container, "");
+  }
 
   function start() {
-    if (started || !img.naturalWidth || !img.naturalHeight) return;
+    if (started || failed) return;
+
+    if (!img.naturalWidth || !img.naturalHeight) {
+      fail(new Error("Portrait image has no usable dimensions."));
+      return;
+    }
 
     started = true;
 
-    const cleanup = createRenderer(canvas, img, options);
+    try {
+      const cleanup = createRenderer(canvas, img, options);
 
-    pfpInstances.set(container, { cleanup, img, canvas });
-    img.style.visibility = "hidden";
+      pfpInstances.set(container, {
+        cleanup,
+        img,
+        canvas
+      });
+    } catch (error) {
+      started = false;
+      fail(error);
+    }
   }
 
-  function onError() {
-    console.error("PFP image failed to load:", img.src);
-    canvas.remove();
-    img.style.visibility = originalVisibility;
-  }
+  img.addEventListener("load", start, { once: true });
+  img.addEventListener("error", () => fail(), { once: true });
 
   if (img.complete) {
-    if (img.naturalWidth > 0) start();
-    else onError();
-  } else {
-    img.addEventListener("load", start, { once: true });
-    img.addEventListener("error", onError, { once: true });
+    if (img.naturalWidth > 0) {
+      start();
+    } else {
+      // A cached image may already have failed.
+      fail();
+    }
   }
 }
+
 
 function initPfpAscii(options = {}) {
   document.querySelectorAll(options.selector || ".pfp").forEach(container => {
