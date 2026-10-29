@@ -29,6 +29,21 @@
 
 <div class="til-list">
   
+  <div class="til-entry" id="anonymous-files" data-search="Anonymous File in Linux til anonymous-files">
+    <div class="til-head">
+      <span class="til-title">Anonymous File in Linux</span>
+      <span class="til-date">2026-10-30</span>
+    </div>
+    <div class="til-body">
+      <p><a href="https://man7.org/linux/man-pages/man2/memfd_create.2.html">memfd_create(2)</a> allows us to create an anonymous file in memory and returns it’s <code>fd</code> where we can write, read to it. That file will have no filesystem path but can still be exposed through <code>/proc</code>.
+<code>memfd_create()</code> normally uses the kernel’s <a href="https://docs.kernel.org/filesystems/tmpfs.html">shmem infrastructure</a>, which supports swapping file contents out to disk when swap is available. Meaning that it isn’t necessary that the anonymous file’s content will always remain in memory.</p>
+
+    </div>
+    <div class="til-foot">
+      <button type="button" class="til-copy" aria-label="copy link to this TIL">copy link</button>
+    </div>
+  </div>
+  
   <div class="til-entry" id="ebpf-intro" data-search="What is eBPF? til ebpf-intro">
     <div class="til-head">
       <span class="til-title">What is eBPF?</span>
